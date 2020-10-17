@@ -5,6 +5,19 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  
+}
+
+/*image next to Flight Finder*/
+a.navbar-brand img {
+    border-radius: 50%;
+    height: 80px;
+    padding: 10px;
+}
+
+input #TextInput {
+    padding: 10px;
+    
 }
 
 /* Provide sufficient contrast against white background */
