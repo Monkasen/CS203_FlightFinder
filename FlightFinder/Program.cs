@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using MySql.Data.MySqlClient;
 using System;
 
 namespace FlightFinder {

@@ -18,181 +18,206 @@
         <img class="calendar-icon" src="~/css/images/calender.png" />
         <input type="date" class="search-date" placeholder="MM/DD/YYYY" />
     </div>  
-<table class="table">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Departure Airport</th>
-            <th scope="col">Arrival Airport</th>
-            <th scope="col">Flight Date</th>
-            <th scope="col">Departure Time</th>
-            <th scope="col">Arrival Time</th>
-            <th scope="col">Estimated Flight Time</th>
-            <th scope="col">Registration Number</th>
-            <th scope="col">Flight Distance</th>
-            <th scope="col">Aircraft Type</th>
-        </tr>
-      
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-            <td>flight</td>
-            <td>flgiht</td>
-            <td>flight</td>
-        </tr>
-    </tbody>
-</table>
-/*idea2*/
-<table class="table">
-    <thead class="thead-light">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>twitter</td>
-        </tr>
-    </tbody>
-</table>
-/*idea 3*/
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>mdo</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>twitter</td>
-        </tr>
-    </tbody>
-</table>
-/*idea 4*/
-<table class="table">
-    <thead>
-        <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Default</td>
-            <td>Defaultson</td>
-            <td>def@somemail.com</td>
-        </tr>
-        <tr class="table-primary">
-            <td>Primary</td>
-            <td>Joe</td>
-            <td>joe@example.com</td>
-        </tr>
-        <tr class="table-success">
-            <td>Success</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr class="table-danger">
-            <td>Danger</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr class="table-info">
-            <td>Info</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-        </tr>
-        <tr class="table-warning">
-            <td>Warning</td>
-            <td>Refs</td>
-            <td>bo@example.com</td>
-        </tr>
-        <tr class="table-active">
-            <td>Active</td>
-            <td>Activeson</td>
-            <td>act@example.com</td>
-        </tr>
-        <tr class="table-secondary">
-            <td>Secondary</td>
-            <td>Secondson</td>
-            <td>sec@example.com</td>
-        </tr>
-        <tr class="table-light">
-            <td>Light</td>
-            <td>Angie</td>
-            <td>angie@example.com</td>
-        </tr>
-        <tr class="table-dark text-dark">
-            <td>Dark</td>
-            <td>Bo</td>
-            <td>bo@example.com</td>
-        </tr>
-    </tbody>
-</table>
+
+    <body>
+        <asp:GridView ID="gvFlight" runat="server" AutoGenerateColumns="false">
+            <Columns>
+                <asp:BoundField DataField="Flight_ID" HeaderText="ID" />
+                <asp:BoundField DataField="Departure_City" HeaderText="ID" />
+                <asp:BoundField DataField="Arrival_City" HeaderText="ID" />
+                <asp:BoundField DataField="Departure_Airport" HeaderText="ID" />
+                <asp:BoundField DataField="Arrival_Airport" HeaderText="ID" />
+                <asp:BoundField DataField="Flight_Date" HeaderText="ID" />
+                <asp:BoundField DataField="Departure_Time" HeaderText="ID" />
+                <asp:BoundField DataField="Arrival_Time" HeaderText="ID" />
+                <asp:BoundField DataField="Estimated_Flight_Time" HeaderText="ID" />
+                <asp:BoundField DataField="Aircraft_Registration" HeaderText="ID" />
+                <asp:BoundField DataField="Aircraft_Type" HeaderText="ID" />
+                <asp:BoundField DataField="Flight_Distance" HeaderText="ID" />
+                <asp:BoundField DataField="Total_Seats" HeaderText="ID" />
+                <asp:BoundField DataField="Open_Seats" HeaderText="ID" />
+            </Columns>
+        </asp:GridView>
+
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Departure Airport</th>
+                    <th scope="col">Arrival Airport</th>
+                    <th scope="col">Flight Date</th>
+                    <th scope="col">Departure Time</th>
+                    <th scope="col">Arrival Time</th>
+                    <th scope="col">Estimated Flight Time</th>
+                    <th scope="col">Registration Number</th>
+                    <th scope="col">Flight Distance</th>
+                    <th scope="col">Aircraft Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                    <td>flight</td>
+                </tr>
+            </tbody>
+        </table>
+
+        /*idea2*/
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>twitter</td>
+                </tr>
+            </tbody>
+        </table>
+
+        /*idea 3*/
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                    <td>twitter</td>
+                </tr>
+            </tbody>
+        </table>
+
+        /*idea 4*/
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Default</td>
+                    <td>Defaultson</td>
+                    <td>def@somemail.com</td>
+                </tr>
+                <tr class="table-primary">
+                    <td>Primary</td>
+                    <td>Joe</td>
+                    <td>joe@example.com</td>
+                </tr>
+                <tr class="table-success">
+                    <td>Success</td>
+                    <td>Doe</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr class="table-danger">
+                    <td>Danger</td>
+                    <td>Moe</td>
+                    <td>mary@example.com</td>
+                </tr>
+                <tr class="table-info">
+                    <td>Info</td>
+                    <td>Dooley</td>
+                    <td>july@example.com</td>
+                </tr>
+                <tr class="table-warning">
+                    <td>Warning</td>
+                    <td>Refs</td>
+                    <td>bo@example.com</td>
+                </tr>
+                <tr class="table-active">
+                    <td>Active</td>
+                    <td>Activeson</td>
+                    <td>act@example.com</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>Secondary</td>
+                    <td>Secondson</td>
+                    <td>sec@example.com</td>
+                </tr>
+                <tr class="table-light">
+                    <td>Light</td>
+                    <td>Angie</td>
+                    <td>angie@example.com</td>
+                </tr>
+                <tr class="table-dark text-dark">
+                    <td>Dark</td>
+                    <td>Bo</td>
+                    <td>bo@example.com</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </body>

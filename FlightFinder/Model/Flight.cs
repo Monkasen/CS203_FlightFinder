@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FlightFinder.Model {
     public class Flight {
-        [Key]
+        [Required]
         public int FlightID { get; set; }
-
         [Required]
         public int AirlineID { get; set; }
         [Required]
