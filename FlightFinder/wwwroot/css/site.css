@@ -8,11 +8,24 @@ a.navbar-brand {
   
 }
 
+.nav-item {
+    right:5%;
+    top: 20px;
+}
+
 /*Image next to Flight Finder*/
-a.navbar-brand img {
+img.flight-finder-icon{
     border-radius: 50%;
     height: 80px;
     padding: 10px;
+}
+
+img.account-icon {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    right: 3%;
+    top: 18px;
 }
 
 /*Search Bars*/

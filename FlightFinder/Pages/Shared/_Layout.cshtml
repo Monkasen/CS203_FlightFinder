@@ -11,9 +11,15 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index"> 
-                    <img class="img-fluid" width="130" src="~/css/images/super_aesthetic.jpg" />FlightFinder
+
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img class="flight-finder-icon" width="130" src="~/css/images/super_aesthetic.jpg" />FlightFinder
                 </a>
+                <a class="navbar-brand" asp-area="" asp-page="/Registration">
+                    <img class="account-icon" src="~/css/images/user.png" />
+
+                </a>
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -32,7 +38,9 @@
                     </ul>
                 </div>
             </div>
+
         </nav>
+        
     </header>
     <div class="container">
         <main role="main" class="pb-3">
