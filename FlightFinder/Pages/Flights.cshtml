@@ -1,5 +1,5 @@
 ﻿@page
-@model FlightFinder.Pages.FlightsModel
+@model FlightFinder.Pages.FlightsModel 
 @{
     ViewData["Title"] = "Flights";
 }
@@ -20,24 +20,7 @@
     </div>  
 
     <body>
-        <asp:GridView ID="gvFlight" runat="server" AutoGenerateColumns="false">
-            <Columns>
-                <asp:BoundField DataField="Flight_ID" HeaderText="ID" />
-                <asp:BoundField DataField="Departure_City" HeaderText="Departure City" />
-                <asp:BoundField DataField="Arrival_City" HeaderText="Arrival City" />
-                <asp:BoundField DataField="Departure_Airport" HeaderText="Departure Airport" />
-                <asp:BoundField DataField="Arrival_Airport" HeaderText="Arrival Airport" />
-                <asp:BoundField DataField="Flight_Date" HeaderText="Flight Date" />
-                <asp:BoundField DataField="Departure_Time" HeaderText="Departure Time" />
-                <asp:BoundField DataField="Arrival_Time" HeaderText="Arrival Time" />
-                <asp:BoundField DataField="Estimated_Flight_Time" HeaderText="Estimated Flight Time" />
-                <asp:BoundField DataField="Aircraft_Registration" HeaderText="Aircraft Registration" />
-                <asp:BoundField DataField="Aircraft_Type" HeaderText="Aircraft Type" />
-                <asp:BoundField DataField="Flight_Distance" HeaderText="Flight Distance" />
-                <asp:BoundField DataField="Total_Seats" HeaderText="Total Seats" />
-                <asp:BoundField DataField="Open_Seats" HeaderText="Open Seats" />
-            </Columns>
-        </asp:GridView>
+        
 
         <table class="table">
             <thead class="thead-dark">
@@ -61,7 +44,7 @@
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td></td>
+                    <td>@Html.()</td>
                     <td></td>
                     <td></td>
                     <td></td>
