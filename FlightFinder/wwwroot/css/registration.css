@@ -1,8 +1,8 @@
 ﻿body {
     margin: 0;
     padding: 0;
-    background-color: azure;
-    font-family: 'Arial';
+    background-color: lightgray;
+    font-family: 'Segoe UI';
 }
 
 .login {
