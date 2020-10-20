@@ -27,9 +27,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Departure City</th>
-                    <th scope="col">Arrival City</th>
-                    <th scope="col">Departure Airport</th>
-                    <th scope="col">Arrival Airport</th>
+                    <th scope="col">Arrival City</th>              
                     <th scope="col">Flight Date</th>
                     <th scope="col">Departure Time</th>
                     <th scope="col">Arrival Time</th>
@@ -44,15 +42,17 @@
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>@Html.()</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>@Html.DisplayFor(m => m.Departure_City)</td>
+                    <td>@Html.DisplayFor(m => m.Arrival_City)</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Date)</td>
+                    <td>@Html.DisplayFor(m => m.Departure_Time)</td>
+                    <td>@Html.DisplayFor(m => m.Arrival_Time)</td>
+                    <td>@Html.DisplayFor(m => m.E_Flight_Time)</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num)</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Type)</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Distance)</td>
+                    <td>@Html.DisplayFor(m => m.Total_Seats)</td>
+                    <td>@Html.DisplayFor(m => m.Open_Seats)</td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>

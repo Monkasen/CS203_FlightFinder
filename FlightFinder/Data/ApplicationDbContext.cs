@@ -12,6 +12,6 @@ namespace FlightFinder.Data {
 
         }
 
-        public DbSet<Flight> Flight { get; set; }
+        //public DbSet<Flight> Flight { get; set; }
     }
 }
