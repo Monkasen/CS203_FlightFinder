@@ -40,8 +40,8 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
+                <tr> <!--TODO: IMPLEMENT LOOP FOR TABLE, SOLVE OVERWRITING DATA-->
+                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID)</th>
                     <td>@Html.DisplayFor(m => m.Departure_City)</td>
                     <td>@Html.DisplayFor(m => m.Arrival_City)</td>
                     <td>@Html.DisplayFor(m => m.Flight_Date)</td>
@@ -67,13 +67,9 @@
                     <td>flight</td>
                     <td>flight</td>
                     <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                </tr>
+                </tr>     
                 <tr>
                     <th scope="row">3</th>
-                    <td>flight</td>
-                    <td>flight</td>
                     <td>flight</td>
                     <td>flight</td>
                     <td>flight</td>

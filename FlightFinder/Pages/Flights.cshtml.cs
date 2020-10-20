@@ -17,7 +17,7 @@ namespace FlightFinder.Pages
 {
     public class FlightsModel : PageModel
     {
-        //public Flight Flight;
+        public string Flight_ID;
         public string Departure_City;
         public string Arrival_City;
         public string Departure_Time;
@@ -31,13 +31,14 @@ namespace FlightFinder.Pages
         public string Total_Seats;
         public string Open_Seats;
         public string YourText;
+        public int TableSize = 0;
 
          public void OnGet() {
             TableFill();
-            YourText = "test";
+            Console.WriteLine(TableSize);
         }
         
-        void TableFill() {
+        public void TableFill() {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
@@ -48,40 +49,36 @@ namespace FlightFinder.Pages
                 cmd.CommandType = CommandType.Text;
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 
-                while (rdr.Read()) { // remove console.writeline and set each equal to variable to pass them to the html
-                    //StringBuilder sb = new StringBuilder();
-                    string ID = (string.Format("flight_id = {0}", rdr["flight_id"].ToString()));
-                   // Flight.FlightID = Convert.ToInt32(ID);
-                    
-                    string D_City = (string.Format("departure_city = {0}", rdr["departure_city"].ToString()));
-                    //string D_City = rdr["departure_ciy"].ToString();
-                    //Departure_City = D_City.ToString();
-                    //sb.AppendFormat("{0}", Departure_City);
+                while (rdr.Read()) { 
+                    string F_ID = (string.Format("{0}", rdr["flight_id"].ToString()));
+                    Flight_ID = F_ID;                    
+                    string D_City = (string.Format("{0}", rdr["departure_city"].ToString()));
                     Departure_City = D_City;
-                    string A_City = (string.Format("arrival_city = {0}", rdr["arrival_city"].ToString()));
+                    string A_City = (string.Format("{0}", rdr["arrival_city"].ToString()));
                     Arrival_City = A_City;
-                    string F_Date = (string.Format("flight_date = {0}", rdr["flight_date"].ToString()));
+                    string F_Date = (string.Format("{0}", rdr["flight_date"].ToString()));
                     Flight_Date = F_Date;
-                    string D_Time = (string.Format("departure_time = {0}", rdr["departure_time"].ToString()));
+                    string D_Time = (string.Format("{0}", rdr["departure_time"].ToString()));
                     Departure_Time = D_Time;
-                    string A_Time = (string.Format("arrival_time = {0}", rdr["arrival_time"].ToString()));
+                    string A_Time = (string.Format("{0}", rdr["arrival_time"].ToString()));
                     Arrival_Time = A_Time;
-                    string E_F_Time = (string.Format("estimated_flight_time = {0}", rdr["estimated_flight_time"].ToString()));
+                    string E_F_Time = (string.Format("{0}", rdr["estimated_flight_time"].ToString()));
                     E_Flight_Time = E_F_Time;                  
-                    string Airline = (string.Format("airline = {0}", rdr["airline"].ToString()));
+                    string Airline = (string.Format("{0}", rdr["airline"].ToString()));
                     Airline_Name = Airline;
-                    string A_Registration = (string.Format("aircraft_registration = {0}", rdr["aircraft_registration"].ToString()));
+                    string A_Registration = (string.Format("{0}", rdr["aircraft_registration"].ToString()));
                     Aircraft_Reg_Num = A_Registration;
-                    string A_Type = (string.Format("aircraft_type = {0}", rdr["aircraft_type"].ToString()));
+                    string A_Type = (string.Format("{0}", rdr["aircraft_type"].ToString()));
                     Aircraft_Type = A_Type;
-                    string F_Distance = (string.Format("flight_distance = {0}", rdr["flight_distance"].ToString()));
+                    string F_Distance = (string.Format("{0} miles", rdr["flight_distance"].ToString()));
                     Flight_Distance = F_Distance;
-                    string T_Seats = (string.Format("total_seats = {0}", rdr["total_seats"].ToString()));
+                    string T_Seats = (string.Format("{0}", rdr["total_seats"].ToString()));
                     Total_Seats = T_Seats;
-                    string O_Seats = (string.Format("open_seats = {0}", rdr["open_seats"].ToString()));
+                    string O_Seats = (string.Format("{0}", rdr["open_seats"].ToString()));
                     Open_Seats = O_Seats;
-                }
 
+                    TableSize++;
+                }
             }
             catch (Exception ex) {
                 Console.WriteLine("{oops - {0}", ex.Message);
