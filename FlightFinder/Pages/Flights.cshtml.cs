@@ -66,7 +66,6 @@ namespace FlightFinder.Pages
                     
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
                     Flight_ID = F_ID.ToArray();
-
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
                     Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
