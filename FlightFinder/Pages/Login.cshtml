@@ -1,11 +1,10 @@
-﻿@page "/"
+﻿@page 
 @model FlightFinder.LoginModel
 @{
     ViewData["Title"] = "Login";
 }
 @section scripts{ 
 <partial name="_ValidationScriptsPartial">}
-
 
 <head>
     <title>Login Form</title>
@@ -22,8 +21,8 @@
                         Email
                     </b>
                 </label>
+                <br><br>
                 <input type="email" asp-for="User_Email" />
-
 
                 <br><br>
 
@@ -32,6 +31,7 @@
                         User Name
                     </b>
                 </label>
+                <br><br>
                 <input type="text" asp-for="Username">
 
                 <br><br>
@@ -41,13 +41,20 @@
                         Password
                     </b>
                 </label>
-                <input type="password" asp-for="Password" >
+                <br><br>
+                <input type="password" asp-for="Password">
 
                 <br><br>
-                <button>Submit</button>
+                <div class="col-2 offset-5">
+                    <input type="submit" value="Submit" class="btn btn-primary form-control" />
+                </div>
+                
                 <br><br>
+
                 <br><br>
                 <a href="">Forgot Password</a>
+                <br><br>
+                <a href="/Registration">Create Account</a>
             </form>
         </div>
     </div>

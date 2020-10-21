@@ -20,8 +20,6 @@
     </div>  
 
     <body>
-        
-
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -40,112 +38,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr> <!--TODO: IMPLEMENT LOOP FOR TABLE, SOLVE OVERWRITING DATA-->
-                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[0])</th>
-                    <td>@Html.DisplayFor(m => m.Departure_City[0])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_City[0])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Date[0])</td>
-                    <td>@Html.DisplayFor(m => m.Departure_Time[0])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_Time[0])</td>
-                    <td>@Html.DisplayFor(m => m.E_Flight_Time[0])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[0])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Type[0])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Distance[0])</td>
-                    <td>@Html.DisplayFor(m => m.Total_Seats[0])</td>
-                    <td>@Html.DisplayFor(m => m.Open_Seats[0])</td>
-                </tr>
-                <tr>
-                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[1])</th>
-                    <td>@Html.DisplayFor(m => m.Departure_City[1])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_City[1])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Date[1])</td>
-                    <td>@Html.DisplayFor(m => m.Departure_Time[1])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_Time[1])</td>
-                    <td>@Html.DisplayFor(m => m.E_Flight_Time[1])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[1])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Type[1])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Distance[1])</td>
-                    <td>@Html.DisplayFor(m => m.Total_Seats[1])</td>
-                    <td>@Html.DisplayFor(m => m.Open_Seats[1])</td>
-                </tr>     
-                <tr>
-                    <th scope="row">3</th>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                    <td>flight</td>
-                </tr>
+                @for (int i = 0; i < 10; ++i) {
+                    <tr>
+                        <!--TODO: MAKE LOOP SCALEABLE-->
+                        <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
+                        <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                        <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                        <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
+                        <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
+                        <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                        <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                        <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
+                        <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
+                        <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
+                        <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
+                        <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                    </tr>
+                }
             </tbody>
-        </table>
-
-        Idea 2:
-        <table class="table">
-            <thead class="thead-light">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>twitter</td>
-                </tr>
-            </tbody>
-        </table>
-
-        Idea 3:
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>twitter</td>
-                </tr>
-            </tbody>
-        </table>
-            
+        </table>           
     </body>

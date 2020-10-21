@@ -21,11 +21,6 @@ namespace FlightFinder {
         {
         
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddMvc()
-            .AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AddPageRoute("/Index", "");
-            });
             services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("DefaultConnection")));
         }

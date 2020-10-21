@@ -29,10 +29,10 @@ namespace FlightFinder
 
         public void OnGet()
         {
-            SearchTable();
+
         }
 
-        void SearchTable()
+        void VerifyUser()
         {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -44,8 +44,7 @@ namespace FlightFinder
             //Password = Request.Form["Password"];
             
 
-            try
-            {
+            try {
                 conn.Open();
 
                 string cmdText = $"SELECT * FROM user WHERE Username = {this.Username} AND Password = {this.Password} AND User_Email = {this.User_Email}";
@@ -54,24 +53,37 @@ namespace FlightFinder
                 adapter.SelectCommand = cmd;
                 adapter.Fill(dataSet);
                 // MySqlDataAdapter adapter = new MySqlDataAdapter();
-                if (dataSet.Rows.Count < 1)
-                {
+                if (dataSet.Rows.Count < 1) {
                     RedirectToPage();
                 }
-                else
-                {
+                else {
                     Redirect("/Flights");
                 }
                 //conn.Dispose();
                 
             }
-            catch (Exception ex)
-            {
+            catch (Exception ex) {
 
                 Console.WriteLine(ex);
             }
             conn.Dispose();
             //return true;
+        }
+
+        public async Task<IActionResult> OnPost(string user, string pass, string email) {
+            user = this.Username;
+            pass = this.Password;
+            email = this.User_Email;
+            Console.WriteLine("test 1");
+            Console.WriteLine("test 2");
+            Console.WriteLine("test 3");
+            if (true) {
+                return Redirect("/Flights");
+            }
+            else {
+                return Page();
+            }
+                
         }
     }
 }

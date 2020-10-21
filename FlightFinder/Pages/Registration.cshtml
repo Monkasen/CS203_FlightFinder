@@ -1,0 +1,72 @@
+﻿@page
+@model FlightFinder.Pages.RegistrationModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<head>
+    <title>Registration Form</title>
+    <link rel="stylesheet" type="text/css" href="~/css/registration.css">
+</head>
+<body>
+    <div class="text-center">
+        <h2>Create Account</h2><br>
+        <div class="login">
+            <form id="create-account" method="get" action="">
+
+                <label>
+                    <b>
+                        Email
+                    </b>
+                </label>
+                <input type="text" name="Email" id="Email" placeholder="Email">
+
+                <br><br>
+
+                <label>
+                    <b>
+                        Password
+                    </b>
+                </label>
+                <input type="Password" name="Pass" id="Pass" placeholder="Password">
+
+                <br><br>
+
+                <label>
+                    <b>
+                        First Name (Optional)
+                    </b>
+                </label>
+                <input type="text" name="Fname" id="Uname" placeholder="First Name">
+
+                <br><br>
+
+                <label>
+                    <b>
+                        Last Name (Optional)
+                    </b>
+                </label>
+                <input type="text" name="Lname" id="Uname" placeholder="Last Name">
+
+                <br><br>
+
+                <label>
+                    <b>
+                        User Name
+                    </b>
+                </label>
+                <input type="text" name="Uname" id="Uname" placeholder="Username">
+
+                <br><br>
+
+                <div class="">
+                    <input type="submit" value="Sign Up" class="btn btn-primary form-control" />
+                </div>
+
+                <br><br>
+                <br><br>
+                <a href="">Forgot Password</a>
+            </form>
+        </div>
+    </div>
+</body>
