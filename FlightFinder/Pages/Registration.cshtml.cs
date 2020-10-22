@@ -18,6 +18,14 @@ namespace FlightFinder.Pages
 {
     public class RegistrationModel : PageModel
     {
+        public int User_ID { get; }
+        public string User_Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
+
+        public DateTime Account_Creation_Date { get; set; }
         public void OnGet()
         {
         }
@@ -27,33 +35,36 @@ namespace FlightFinder.Pages
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
-            try {
-                conn.Open();
+            Username = Request.Form["Username"];
+            User_Email = Request.Form["User_Email"];
+            Password = Request.Form["Password"];
+            First_Name = Request.Form["First_Name"];
+            Last_Name = Request.Form["Last_Name"];
+            Account_Creation_Date = DateTime.Today;
 
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO User VALUES(Used_ID, User_Email, Username, Password, First_Name, Last_Name, Account_Creation_Date)", conn);
-                cmd.CommandType = CommandType.Text;
-                MySqlDataReader rdr = cmd.ExecuteReader();
-                /*
-                cmd.Parameters.AddWithValue("@User_ID", User_ID);
-                cmd.Parameters.AddWithValue("@User_Email", User_Email);
-                cmd.Parameters.AddWithValue("@Username", Username);
-                cmd.Parameters.AddWithValue("@Password", Password);
-                cmd.Parameters.AddWithValue("@First_Name", First_Name);
-                cmd.Parameters.AddWithValue("@Last_Name", User_Email);
-                cmd.Parameters.AddWithValue("@Account_Creation_Date", Account_Creation_Date);
-                */
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex) {
-                Console.WriteLine("{oops - {0}", ex.Message);
-            }
+            conn.Open();
+
+            string txtcmd = $"INSERT INTO user (User_Email, Username, Password, First_Name, Last_Name, Account_Creation_Date) " +
+                $"VALUES (@User_Email, @Username, @Password, @First_Name, @Last_Name, @Account_Creation_Date )";
+            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
+            cmd.CommandType = CommandType.Text;
+            
+            cmd.Parameters.AddWithValue("@User_Email", User_Email);
+            cmd.Parameters.AddWithValue("@Username", Username);
+            cmd.Parameters.AddWithValue("@Password", Password);
+            cmd.Parameters.AddWithValue("@First_Name", First_Name);
+            cmd.Parameters.AddWithValue("@Last_Name", Last_Name);
+            cmd.Parameters.AddWithValue("@Account_Creation_Date", Account_Creation_Date);
+            cmd.Prepare();
+            cmd.ExecuteReader();
+           
             conn.Dispose();
         }
 
         public async Task<IActionResult> OnPost()
         {
-            return Page();
+            AddUserToDB();
+            return Redirect("/Flights");
         }
         //add stuff to db here
     

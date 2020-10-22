@@ -8,7 +8,7 @@
 
 <head>
     <title>Login Form</title>
-    <link rel="stylesheet" type="text/css" href="~/css/registration.css">
+    <link rel="stylesheet" type="text/css" href="~/css/Login.css">
 </head>
 <body>
     <div class="text-center">
@@ -22,7 +22,7 @@
                     </b>
                 </label>
                 <br><br>
-                <input type="email" asp-for="User_Email" />
+                <input type="email" asp-for="User_Email" placeholder="Email" />
 
                 <br><br>
 
@@ -32,7 +32,7 @@
                     </b>
                 </label>
                 <br><br>
-                <input type="text" asp-for="Username">
+                <input type="text" asp-for="Username" placeholder="Username">
 
                 <br><br>
 
@@ -42,20 +42,27 @@
                     </b>
                 </label>
                 <br><br>
-                <input type="password" asp-for="Password">
+                <input type="password" asp-for="Password" placeholder="Password">
 
                 <br><br>
                 <div class="col-2 offset-5">
                     <input type="submit" value="Submit" class="btn btn-primary form-control" />
                 </div>
-                
-                <br><br>
 
                 <br><br>
-                <a href="">Forgot Password</a>
+
+               
+                    <div>
+                        <a class="forgot-password" href="">Forgot Password </a>
+                        <br><br>
+                        <a class="btn-link" asp-page="/Registration"> Create Account</a>
+                    </div>
+                
                 <br><br>
-                <a href="/Registration">Create Account</a>
             </form>
         </div>
     </div>
+    
+        
+    
 </body>
