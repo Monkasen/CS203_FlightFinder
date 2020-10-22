@@ -12,23 +12,32 @@
     <div class="text-center">
         <h2>Create Account</h2><br>
         <div class="login">
-            <form id="create-account" method="get" action="">
+            <form id="create-account" method="post" action="">
 
                 <label>
                     <b>
                         Email
                     </b>
                 </label>
-                <input type="text" name="Email" id="Email" placeholder="Email">
+                <input type="email" asp-for="User_Email" placeholder="Email" />
 
                 <br><br>
 
                 <label>
                     <b>
-                        Password
+                        Username
                     </b>
                 </label>
-                <input type="Password" name="Pass" id="Pass" placeholder="Password">
+                <input type="text" asp-for="Username" placeholder="Username">
+
+                <br><br>
+
+                <label>
+                    <b>
+                        Password 
+                    </b>
+                </label>
+                <input type="password" asp-for="Password" placeholder="Password">
 
                 <br><br>
 
@@ -37,7 +46,7 @@
                         First Name (Optional)
                     </b>
                 </label>
-                <input type="text" name="Fname" id="Uname" placeholder="First Name">
+                <input type="text" asp-for="First_Name" placeholder="First Name">
 
                 <br><br>
 
@@ -46,16 +55,7 @@
                         Last Name (Optional)
                     </b>
                 </label>
-                <input type="text" name="Lname" id="Uname" placeholder="Last Name">
-
-                <br><br>
-
-                <label>
-                    <b>
-                        User Name
-                    </b>
-                </label>
-                <input type="text" name="Uname" id="Uname" placeholder="Username">
+                <input type="text" asp-for="Last_Name" placeholder="Last Name">
 
                 <br><br>
 
