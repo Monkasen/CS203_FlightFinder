@@ -25,7 +25,7 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Departure City</th>
-                    <th scope="col">Arrival City</th>              
+                    <th scope="col">Arrival City</th>
                     <th scope="col">Flight Date</th>
                     <th scope="col">Departure Time</th>
                     <th scope="col">Arrival Time</th>
@@ -35,12 +35,12 @@
                     <th scope="col">Flight Distance</th>
                     <th scope="col">Total Seats</th>
                     <th scope="col">Open Seats</th>
+                    <th scope="col">Save Flight</th>
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < 20; ++i) {
+                @for (int i = 0; i < @Model.TableSize - 1; ++i) {
                 <tr>
-                    <!--TODO: MAKE LOOP SCALEABLE-->
                     <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
                     <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
                     <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
