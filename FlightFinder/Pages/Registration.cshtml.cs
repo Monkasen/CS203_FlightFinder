@@ -64,7 +64,7 @@ namespace FlightFinder.Pages
         public async Task<IActionResult> OnPost()
         {
             AddUserToDB();
-            return Redirect("/Flights");
+            return Redirect("/Login");
         }
         //add stuff to db here
     

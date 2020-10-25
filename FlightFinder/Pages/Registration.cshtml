@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Registration";
 }
+@section scripts{
+    <partial name="_ValidationScriptsPartial">
+}
 
 <head>
     <title>Registration Form</title>
@@ -34,7 +37,7 @@
 
                 <label>
                     <b>
-                        Password 
+                        Password
                     </b>
                 </label>
                 <input type="password" asp-for="Password" placeholder="Password">
@@ -62,10 +65,6 @@
                 <div class="">
                     <input type="submit" value="Sign Up" class="btn btn-primary form-control" />
                 </div>
-
-                <br><br>
-                <br><br>
-                <a href="">Forgot Password</a>
             </form>
         </div>
     </div>

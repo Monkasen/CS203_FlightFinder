@@ -39,21 +39,22 @@
             </thead>
             <tbody>
                 @for (int i = 0; i < 20; ++i) {
-                    <tr>
-                        <!--TODO: MAKE LOOP SCALEABLE-->
-                        <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
-                        <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
-                        <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
-                        <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
-                        <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
-                        <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
-                        <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
-                        <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
-                        <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
-                        <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
-                        <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
-                        <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
-                    </tr>
+                <tr>
+                    <!--TODO: MAKE LOOP SCALEABLE-->
+                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
+                    <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                    <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
+                    <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
+                    <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
+                    <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                    <td><button type="button">Save</button></td>
+                </tr>
                 }
             </tbody>
         </table>           

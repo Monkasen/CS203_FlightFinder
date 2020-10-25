@@ -4,34 +4,34 @@
     ViewData["Title"] = "Login";
 }
 @section scripts{ 
-<partial name="_ValidationScriptsPartial">}
+<partial name="_ValidationScriptsPartial">
+}
 
 <head>
     <title>Login Form</title>
-    <link rel="stylesheet" type="text/css" href="~/css/Login.css">
+    <link rel="stylesheet" type="text/css" href="~/css/login.css">
 </head>
 <body>
     <div class="text-center">
         <h2>Login</h2><br>
-        <div class="Login">
-            <form id="Login" method="post" action="">
+        <div class="login">
+            <form id="login" method="post" action="">
 
                 <label>
                     <b>
                         Email
                     </b>
                 </label>
-                <br><br>
                 <input type="email" asp-for="User_Email" placeholder="Email" />
 
                 <br><br>
 
                 <label>
                     <b>
-                        User Name
+                        Username
                     </b>
                 </label>
-                <br><br>
+                <br>
                 <input type="text" asp-for="Username" placeholder="Username">
 
                 <br><br>
@@ -41,28 +41,23 @@
                         Password
                     </b>
                 </label>
-                <br><br>
+                <br>
                 <input type="password" asp-for="Password" placeholder="Password">
 
                 <br><br>
-                <div class="col-2 offset-5">
+                <div class="">
                     <input type="submit" value="Submit" class="btn btn-primary form-control" />
                 </div>
-
+                <br>
+                <label style="color:red">@Html.DisplayFor(m => m.ErrorText)</label>
                 <br><br>
 
-               
-                    <div>
-                        <a class="forgot-password" href="">Forgot Password </a>
-                        <br><br>
-                        <a class="btn-link" asp-page="/Registration"> Create Account</a>
-                    </div>
-                
-                <br><br>
+                <div>
+                    <a class="forgot-password" href="">Forgot Password </a>
+                    <br>
+                    <a class="btn-link" asp-page="/Registration"> Create Account</a>
+                </div>
             </form>
         </div>
-    </div>
-    
-        
-    
+    </div>    
 </body>
