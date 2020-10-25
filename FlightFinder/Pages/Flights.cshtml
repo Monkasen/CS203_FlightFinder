@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int i = 0; i < @Model.TableSize - 1; ++i) {
+                @for (int i = 0; i < @Model.TableSize; ++i) {
                 <tr>
                     <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
                     <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
@@ -53,7 +53,10 @@
                     <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
                     <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
                     <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
-                    <td><button type="button">Save</button></td>
+                    <td><form id="save-flight" method="post">
+                            <button name="submit" type="submit" value="@Model.Flight_ID[i]">Save</button>
+                        </form>
+                    </td>
                 </tr>
                 }
             </tbody>

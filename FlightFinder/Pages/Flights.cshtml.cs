@@ -44,11 +44,12 @@ namespace FlightFinder.Pages
         List<string> O_Seats = new List<string>();
         public string[] Open_Seats;
 
-        public int TableSize = 1;
+        public int TableSize = 0;
+        private string ButtonValue = "default";
 
          public void OnGet() {
             TableFill();
-            Console.WriteLine(TableSize);
+            Console.WriteLine($"DEBUG - TableSize = {TableSize}");
         }
         
         public void TableFill() {
@@ -99,5 +100,34 @@ namespace FlightFinder.Pages
             }
             conn.Dispose(); 
         }
-    }  
+
+        public void AddFlightToDB() { // Saves specified flight ID to specified user ID
+
+            ButtonValue = Request.Form["submit"];
+            Console.WriteLine($"DEBUG - ButtonValue = {ButtonValue}");
+            
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string txtcmd = $"INSERT INTO saved_flights (User_ID, Flight_ID) " +
+                $"VALUES (@User_ID, @Flight_ID )";
+            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Parameters.AddWithValue("@User_ID", 1); // THIS IS WHERE WE ASSIGN WHAT USER GETS THE SAVED FLIGHT, RIGHT NOW IT DEFAULTS TO USER 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            cmd.Parameters.AddWithValue("@Flight_ID", ButtonValue);
+            cmd.Prepare();
+            cmd.ExecuteReader();
+
+            conn.Dispose();
+        }
+
+        public async Task<IActionResult> OnPost(string submit) {
+            AddFlightToDB();
+            TableFill();
+
+            return RedirectToPage();
+        }
+    }     
 }

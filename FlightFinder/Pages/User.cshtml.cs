@@ -45,7 +45,7 @@ namespace FlightFinder.Pages
         List<string> O_Seats = new List<string>();
         public string[] Open_Seats;
 
-        public int TableSize = 1;
+        public int TableSize = 0;
 
         public void OnGet() {
             User_ID = Request.Query["User_ID"];
