@@ -25,8 +25,7 @@ namespace FlightFinder
 
         public string ErrorText { get; set; }
 
-        public void OnGet()
-        {
+        public void OnGet() {
             ErrorText = "";
         }
 

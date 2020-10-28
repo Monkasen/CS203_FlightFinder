@@ -36,6 +36,7 @@
                     <th scope="col">Total Seats</th>
                     <th scope="col">Open Seats</th>
                     <th scope="col">Save Flight</th>
+                    <th scope="col">Book Flight</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,8 +54,14 @@
                     <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
                     <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
                     <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
-                    <td><form id="save-flight" method="post">
-                            <button name="submit" type="submit" value="@Model.Flight_ID[i]">Save</button>
+                    <td>
+                        <form id="save-flight" method="post">
+                            <button name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form id="save-flight" method="post">
+                            <button name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
                         </form>
                     </td>
                 </tr>

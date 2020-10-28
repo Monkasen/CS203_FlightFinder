@@ -45,11 +45,9 @@ namespace FlightFinder.Pages
         public string[] Open_Seats;
 
         public int TableSize = 0;
-        private string ButtonValue = "default";
 
          public void OnGet() {
             TableFill();
-            Console.WriteLine($"DEBUG - TableSize = {TableSize}");
         }
         
         public void TableFill() {
@@ -101,11 +99,7 @@ namespace FlightFinder.Pages
             conn.Dispose(); 
         }
 
-        public void AddFlightToDB() { // Saves specified flight ID to specified user ID
-
-            ButtonValue = Request.Form["submit"];
-            Console.WriteLine($"DEBUG - ButtonValue = {ButtonValue}");
-            
+        private void SaveFlightToDB(string ButtonValue) { // Saves specified flight ID to specified user ID         
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -124,9 +118,27 @@ namespace FlightFinder.Pages
         }
 
         public async Task<IActionResult> OnPost(string submit) {
-            AddFlightToDB();
-            TableFill();
+            string parsedID = null;
 
+            for (int i = 0; i < submit.Length; i++) { // Parse Flight_ID from button value
+                if (Char.IsDigit(submit[i]))
+                    parsedID += submit[i];
+            }
+            Console.WriteLine($"DEBUG - OUTPUT OF PARSE = {parsedID}");
+
+            if (submit[0] == 'B') { // Determine if the flight is to be booked...
+                Console.WriteLine("DEBUG - Book");
+                return Redirect($"/Book?Flight_ID={parsedID}");
+            }
+            else if (submit[0] == 'S') { // ...or to be saved.
+                Console.WriteLine("DEBUG - Save");
+                SaveFlightToDB(parsedID);
+            }
+            else {
+                Console.WriteLine("DEBUG - Error");
+            }
+            
+            TableFill();
             return RedirectToPage();
         }
     }     
