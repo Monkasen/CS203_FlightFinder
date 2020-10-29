@@ -148,11 +148,7 @@ namespace FlightFinder.Pages
                 return true;
             }
         }
-
-        
-
-        
-
+      
         public void TableFill() {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -227,7 +223,6 @@ namespace FlightFinder.Pages
                 if (Char.IsDigit(submit[i]))
                     parsedID += submit[i];
             }
-            Console.WriteLine($"DEBUG - OUTPUT OF PARSE = {parsedID}");
 
             if (submit[0] == 'B') { // Determine if the flight is to be booked...
                 Console.WriteLine("DEBUG - Book");
@@ -236,34 +231,18 @@ namespace FlightFinder.Pages
             else if (submit[0] == 'S') { // ...saved...
                 Console.WriteLine("DEBUG - Save");
                 SaveFlightToDB(parsedID);
+                TableFill();
             }
-            else if(submit[0] == 'F') {//... or filtered through
-                Console.WriteLine("Filter results");
+            else if (submit[0] == 'F') {// ...or filtered through.
+                Console.WriteLine("DEBUG - Filter");
                 FilterResults();
-                return RedirectToPage();
             }
             else {
                 Console.WriteLine("DEBUG - Error");
             }
-            
-            TableFill();
+
             return RedirectToPage();
         }
 
-
-        public async Task<IActionResult> OnPostFilter()
-        {
-            if(FilterResults())
-            {
-                return RedirectToPage();
-            }
-            else
-            {
-                Console.WriteLine("No Flights match your search");
-                return RedirectToPage();
-            }
-        }
     }     
-
-
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/Flights.css">
 </head>
 <div class="search-container">
-    <form id="filter-search" method="get" asp-page-handler="Filter">
+    <form id="filter-search" method="post">
         <div class="first-element">
             <div class="from">
                 <b class="text-from">From</b>
@@ -50,9 +50,9 @@
             </div>
         </div>
     </form>
-    <form method="post" asp-page-handler="Filter">
+    <form method="post">
         <div class="button-element">
-            <input name="Filter" class="btn btn-primary" type="submit" value="Filter"  />
+            <button class="btn btn-primary" name="submit" type="submit" value="F">Filter</button>
         </div>
     </form>  
 </div>
