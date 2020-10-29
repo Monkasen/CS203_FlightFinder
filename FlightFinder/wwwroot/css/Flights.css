@@ -1,0 +1,59 @@
+﻿.search-container {
+    height: 90px;
+    width: auto;
+}
+
+.second-element {
+    position: relative;
+    left: 270px;
+    bottom: 85px;
+}
+
+.third-element {
+    position: relative;
+    left: 570px;
+    bottom: 168px;
+}
+
+.to .text-to {
+    padding-right: 20px;
+}
+
+.airline-element .text-airline {
+    padding-right: 15px;
+}
+
+.arrival-time-element .text-arrival-time {
+    padding-right: 25px;
+}
+
+
+.button-element {
+    position: relative;
+    left: 900px;
+    bottom: 251px;
+}
+
+/*
+    Textboxes
+*/
+#Airline_TextBox.airline {
+    border: 2px solid;
+    border-radius: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+#Depart_Time_TextBox.depart-time {
+    border: 2px solid;
+    border-radius: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+
+#Arrival_Time_TextBox.arrival-time {
+    border: 2px solid;
+    border-radius: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+}
