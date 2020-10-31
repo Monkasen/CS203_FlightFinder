@@ -8,6 +8,7 @@
     <title>Flights</title>
     <link rel="stylesheet" type="text/css" href="~/css/Flights.css">
 </head>
+<!--
 <div class="search-container">
     <form id="filter-search" method="post">
         <div class="first-element">
@@ -54,10 +55,57 @@
         <div class="button-element">
             <button class="btn btn-primary" name="submit" type="submit" value="F">Filter</button>
         </div>
-    </form>  
+    </form>
 </div>
-
-<body>
+-->
+<body>  
+    <div class="search">
+        <form id="search" method="post" action="">
+            <div class="first-element">
+                <div class="from">
+                    <b class="text-from">From</b>
+                    <img class="search-icon" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+                    <input type="text" asp-for="From_TextBox" placeholder="Airport, City or County">
+                </div>
+                <br />
+                <div class="to">
+                    <b class="text-to">To</b>
+                    <img class="search-icon" src="data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDU2Ljk2NiA1Ni45NjYiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDU2Ljk2NiA1Ni45NjY7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4Ij4KPHBhdGggZD0iTTU1LjE0Niw1MS44ODdMNDEuNTg4LDM3Ljc4NmMzLjQ4Ni00LjE0NCw1LjM5Ni05LjM1OCw1LjM5Ni0xNC43ODZjMC0xMi42ODItMTAuMzE4LTIzLTIzLTIzcy0yMywxMC4zMTgtMjMsMjMgIHMxMC4zMTgsMjMsMjMsMjNjNC43NjEsMCw5LjI5OC0xLjQzNiwxMy4xNzctNC4xNjJsMTMuNjYxLDE0LjIwOGMwLjU3MSwwLjU5MywxLjMzOSwwLjkyLDIuMTYyLDAuOTIgIGMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxNyAgcy0xNy03LjYyNi0xNy0xN1MxNC42MSw2LDIzLjk4NCw2eiIgZmlsbD0iIzAwMDAwMCIvPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K" />
+                    <input type="text" asp-for="To_TextBox" placeholder="Airport, City or County">
+                </div>
+            </div>
+            <div class="second-element">
+                <div class="depart-date">
+                    <b class="text-depart">Departure</b>
+                    <img class="calendar-icon" src="~/css/images/calender.png" />
+                    <input type="date" asp-for="DepartDate_TextBox" placeholder="MM/DD/YYYY">
+                </div>
+                <br />
+                <div class="airline-element">
+                    <b class="text-airline">Airline</b>
+                    <img class="calendar-icon" src="~/css/images/airline.png" />
+                    <input type="text" asp-for="Airline_TextBox" name="Airline" placeholder="Airline" />
+                </div>
+            </div>
+            <div class="third-element">
+                <div class="depart-time-element">
+                    <b class="text-depart-time">Departure Time</b>
+                    <img class="calendar-icon" src="~/css/images/time.jpg" />
+                    <input type="time" asp-for="Depart_Time_TextBox" name="depart_time" />
+                </div>
+                <br />
+                <div class="arrival-time-element">
+                    <b class="text-arrival-time">Arrival Time</b>
+                    <img class="calendar-icon" src="~/css/images/time.jpg" />
+                    <input type="time" name="arrival_time" asp-for="Arrival_Time_TextBox" />
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-success" name="submit" type="submit" value="F">Filter</button>
+            </div>
+        </form>
+    </div>
+    
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -78,8 +126,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (int i = 0; i < @Model.TableSize; ++i)
-            {
+            @for (int i = 0; i < @Model.TableSize; ++i) {
                 <tr>
                     <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
                     <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
@@ -95,12 +142,12 @@
                     <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
                     <td>
                         <form id="save-flight" method="post">
-                            <button name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
+                            <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
                         </form>
                     </td>
                     <td>
                         <form id="save-flight" method="post">
-                            <button name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
+                            <button class="btn btn-success" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
                         </form>
                     </td>
                 </tr>

@@ -24,13 +24,15 @@ namespace FlightFinder.Pages
         public string Password { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
+        public string ErrorText { get; set; }
 
         public DateTime Account_Creation_Date { get; set; }
         public void OnGet()
         {
+            ErrorText = "";
         }
 
-        public void AddUserToDB()
+        public bool AddUserToDB()
         {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -41,6 +43,11 @@ namespace FlightFinder.Pages
             First_Name = Request.Form["First_Name"];
             Last_Name = Request.Form["Last_Name"];
             Account_Creation_Date = DateTime.Today;
+
+            if (Username == "" || User_Email == "" || Password == "") {
+                ErrorText = "Not all required fields are completed. Please try again.";
+                return false;
+            }
 
             conn.Open();
 
@@ -59,14 +66,18 @@ namespace FlightFinder.Pages
             cmd.ExecuteReader();
            
             conn.Dispose();
+            return true;
         }
 
         public async Task<IActionResult> OnPost()
         {
-            AddUserToDB();
-            return Redirect("/Login");
+            if (AddUserToDB()) {
+                return Redirect("/Login");
+            }
+            else {
+                return Page();
+            }
+
         }
-        //add stuff to db here
-    
     }
 }

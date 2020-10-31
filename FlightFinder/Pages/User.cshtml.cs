@@ -49,6 +49,10 @@ namespace FlightFinder.Pages
 
         public void OnGet() {
             User_ID = Request.Query["User_ID"];
+            if (User_ID == null) { // If nothing is retrieved, default to user 1. Later set this to error page, or redirect to login page.
+                User_ID = "1";
+            }
+            
             TableFill();
             Console.WriteLine($"THIS IS ON USER PAGE: {User_ID}");
         }

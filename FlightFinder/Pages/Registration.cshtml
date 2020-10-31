@@ -16,10 +16,9 @@
         <h2>Create Account</h2><br>
         <div class="login">
             <form id="create-account" method="post" action="">
-
                 <label>
                     <b>
-                        Email
+                        Email<label style="color:red">*</label>
                     </b>
                 </label>
                 <input type="email" asp-for="User_Email" placeholder="Email" />
@@ -28,7 +27,7 @@
 
                 <label>
                     <b>
-                        Username
+                        Username<label style="color:red">*</label>
                     </b>
                 </label>
                 <input type="text" asp-for="Username" placeholder="Username">
@@ -37,7 +36,7 @@
 
                 <label>
                     <b>
-                        Password
+                        Password<label style="color:red">*</label>
                     </b>
                 </label>
                 <input type="password" asp-for="Password" placeholder="Password">
@@ -60,11 +59,15 @@
                 </label>
                 <input type="text" asp-for="Last_Name" placeholder="Last Name">
 
-                <br><br>
+                <br>
+                <label style="color:red">*</label> Indicates a required field.
+                <br>
 
                 <div class="">
                     <input type="submit" value="Sign Up" class="btn btn-primary form-control" />
                 </div>
+                <br>
+                <label style="color:red">@Html.DisplayFor(m => m.ErrorText)</label>
             </form>
         </div>
     </div>

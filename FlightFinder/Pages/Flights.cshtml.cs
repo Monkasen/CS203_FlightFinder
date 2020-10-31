@@ -58,6 +58,8 @@ namespace FlightFinder.Pages
 
         public string Arrival_Time_TextBox { get; set; }
 
+        public string DebugText { get; set; }
+
         public void OnGet() {
             TableFill();
         }
@@ -78,22 +80,22 @@ namespace FlightFinder.Pages
             DataTable dataSet = new DataTable();
 
 
-            if (!String.IsNullOrEmpty(Request.Form["From"]))
+            if (!String.IsNullOrEmpty(Request.Form["FromFrom_TextBox"]))
             {
-                From_TextBox = Request.Form["From"];
+                From_TextBox = Request.Form["FromFrom_TextBox"];
             }
 
-            if (!String.IsNullOrEmpty(Request.Form["To"]))
+            if (!String.IsNullOrEmpty(Request.Form["To_TextBox"]))
             {
-                To_TextBox = Request.Form["To"];
+                To_TextBox = Request.Form["To_TextBox"];
             }
-            if (!String.IsNullOrEmpty(Request.Form["DepartDate"]))
+            if (!String.IsNullOrEmpty(Request.Form["DepartDate_TextBox"]))
             {
-                DepartDate_TextBox = DateTime.Parse(Request.Form["DepartDate"]);
+                DepartDate_TextBox = DateTime.Parse(Request.Form["DepartDate_TextBox"]);
             }
-            if (!String.IsNullOrEmpty(Request.Form["Airline"]))
+            if (!String.IsNullOrEmpty(Request.Form["Airline_TextBox"]))
             {
-                Airline_TextBox = Request.Form["Airline"];
+                Airline_TextBox = Request.Form["Airline_TextBox"];
             }
             
 
@@ -114,7 +116,6 @@ namespace FlightFinder.Pages
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
                     Flight_ID = F_ID.ToArray();
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
@@ -235,6 +236,7 @@ namespace FlightFinder.Pages
             }
             else if (submit[0] == 'F') {// ...or filtered through.
                 Console.WriteLine("DEBUG - Filter");
+                DebugCommand();
                 FilterResults();
             }
             else {
@@ -242,6 +244,16 @@ namespace FlightFinder.Pages
             }
 
             return RedirectToPage();
+        }
+
+        public void DebugCommand() {
+            DebugText = Request.Form["DebugText"];
+            Console.WriteLine(DebugText);
+
+            From_TextBox = Request.Form["From_TextBox"];
+            Console.WriteLine(From_TextBox);
+            To_TextBox = Request.Form["To_TextBox"];
+            Console.WriteLine(To_TextBox);
         }
 
     }     
