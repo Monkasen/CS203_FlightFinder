@@ -67,6 +67,7 @@ namespace FlightFinder.Pages
         public bool FilterResults()
         {
             TableSize = 0;
+            ModelState.Clear();
             D_City.Clear();
             A_City.Clear();
             D_Time.Clear();
@@ -80,9 +81,9 @@ namespace FlightFinder.Pages
             DataTable dataSet = new DataTable();
 
 
-            if (!String.IsNullOrEmpty(Request.Form["FromFrom_TextBox"]))
+            if (!String.IsNullOrEmpty(Request.Form["From_TextBox"]))
             {
-                From_TextBox = Request.Form["FromFrom_TextBox"];
+                From_TextBox = Request.Form["From_TextBox"];
             }
 
             if (!String.IsNullOrEmpty(Request.Form["To_TextBox"]))
@@ -112,36 +113,38 @@ namespace FlightFinder.Pages
                 return false;
             }
             else
-            {
+            { 
                 MySqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
+
+                for (int i = 0; i < dataSet.Rows.Count; i++)
                 {
+                    rdr.Read();
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
-                    Flight_ID = F_ID.ToArray();
+                    this.Flight_ID = F_ID.ToArray();
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
-                    Departure_City = D_City.ToArray();
+                    this.Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
-                    Arrival_City = A_City.ToArray();
+                    this.Arrival_City = A_City.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
-                    Flight_Date = F_Date.ToArray();
+                    this.Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
-                    Departure_Time = D_Time.ToArray();
+                    this.Departure_Time = D_Time.ToArray();
                     A_Time.Add(string.Format("{0}", rdr["arrival_time"].ToString()));
-                    Arrival_Time = A_Time.ToArray();
+                    this.Arrival_Time = A_Time.ToArray();
                     E_F_Time.Add(string.Format("{0}", rdr["estimated_flight_time"].ToString()));
-                    E_Flight_Time = E_F_Time.ToArray();
+                    this.E_Flight_Time = E_F_Time.ToArray();
                     Air_Name.Add(string.Format("{0}", rdr["airline"].ToString()));
-                    Airline_Name = Air_Name.ToArray();
+                    this.Airline_Name = Air_Name.ToArray();
                     A_Registration.Add(string.Format("{0}", rdr["aircraft_registration"].ToString()));
-                    Aircraft_Reg_Num = A_Registration.ToArray();
+                    this.Aircraft_Reg_Num = A_Registration.ToArray();
                     A_Type.Add(string.Format("{0}", rdr["aircraft_type"].ToString()));
-                    Aircraft_Type = A_Type.ToArray();
+                    this.Aircraft_Type = A_Type.ToArray();
                     F_Distance.Add(string.Format("{0} miles", rdr["flight_distance"].ToString()));
-                    Flight_Distance = F_Distance.ToArray();
+                    this.Flight_Distance = F_Distance.ToArray();
                     T_Seats.Add(string.Format("{0}", rdr["total_seats"].ToString()));
-                    Total_Seats = T_Seats.ToArray();
+                    this.Total_Seats = T_Seats.ToArray();
                     O_Seats.Add(string.Format("{0}", rdr["open_seats"].ToString()));
-                    Open_Seats = O_Seats.ToArray();
+                    this.Open_Seats = O_Seats.ToArray();
 
                     TableSize++;
                 }
@@ -164,31 +167,31 @@ namespace FlightFinder.Pages
                 while (rdr.Read()) {
                     
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
-                    Flight_ID = F_ID.ToArray();
+                    this.Flight_ID = F_ID.ToArray();
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
-                    Departure_City = D_City.ToArray();
+                    this.Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
-                    Arrival_City = A_City.ToArray();
+                    this.Arrival_City = A_City.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
-                    Flight_Date = F_Date.ToArray();
+                    this.Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
-                    Departure_Time = D_Time.ToArray();
+                    this.Departure_Time = D_Time.ToArray();
                     A_Time.Add(string.Format("{0}", rdr["arrival_time"].ToString()));
-                    Arrival_Time = A_Time.ToArray(); 
+                    this.Arrival_Time = A_Time.ToArray(); 
                     E_F_Time.Add(string.Format("{0}", rdr["estimated_flight_time"].ToString()));
-                    E_Flight_Time = E_F_Time.ToArray();
+                    this.E_Flight_Time = E_F_Time.ToArray();
                     Air_Name.Add(string.Format("{0}", rdr["airline"].ToString()));
-                    Airline_Name = Air_Name.ToArray();
+                    this.Airline_Name = Air_Name.ToArray();
                     A_Registration.Add(string.Format("{0}", rdr["aircraft_registration"].ToString()));
-                    Aircraft_Reg_Num = A_Registration.ToArray();
+                    this.Aircraft_Reg_Num = A_Registration.ToArray();
                     A_Type.Add(string.Format("{0}", rdr["aircraft_type"].ToString()));
-                    Aircraft_Type = A_Type.ToArray();
+                    this.Aircraft_Type = A_Type.ToArray();
                     F_Distance.Add(string.Format("{0} miles", rdr["flight_distance"].ToString()));
-                    Flight_Distance = F_Distance.ToArray();
+                    this.Flight_Distance = F_Distance.ToArray();
                     T_Seats.Add(string.Format("{0}", rdr["total_seats"].ToString()));
-                    Total_Seats = T_Seats.ToArray();
+                    this.Total_Seats = T_Seats.ToArray();
                     O_Seats.Add(string.Format("{0}", rdr["open_seats"].ToString()));
-                    Open_Seats = O_Seats.ToArray();
+                    this.Open_Seats = O_Seats.ToArray();
 
                     TableSize++;
                 }
@@ -234,10 +237,16 @@ namespace FlightFinder.Pages
                 SaveFlightToDB(parsedID);
                 TableFill();
             }
-            else if (submit[0] == 'F') {// ...or filtered through.
+            else if (submit[0] == 'F')// ...or filtered through.
+            {
                 Console.WriteLine("DEBUG - Filter");
                 DebugCommand();
-                FilterResults();
+                if (FilterResults())
+                {
+                    //return RedirectToPage("./Flights");
+                }
+
+                
             }
             else {
                 Console.WriteLine("DEBUG - Error");

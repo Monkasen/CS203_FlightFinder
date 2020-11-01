@@ -1,5 +1,5 @@
-﻿.search-container {
-    height: 90px;
+﻿.search {
+    height: 115px;
     width: auto;
 }
 
@@ -28,7 +28,7 @@
 }
 
 
-.button-element {
+.btn.btn-success  {
     position: relative;
     left: 900px;
     bottom: 251px;
