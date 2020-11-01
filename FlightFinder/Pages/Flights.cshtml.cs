@@ -237,32 +237,21 @@ namespace FlightFinder.Pages
                 SaveFlightToDB(parsedID);
                 TableFill();
             }
-            else if (submit[0] == 'F')// ...or filtered through.
-            {
+            else if (submit[0] == 'F') { // ...or filtered through.
                 Console.WriteLine("DEBUG - Filter");
-                DebugCommand();
-                if (FilterResults())
-                {
-                    //return RedirectToPage("./Flights");
-                }
-
-                
+                FilterResults();
+                return Page();
             }
             else {
                 Console.WriteLine("DEBUG - Error");
+                return Redirect("/Error");
             }
 
-            return RedirectToPage();
+            return Page();
         }
 
         public void DebugCommand() {
-            DebugText = Request.Form["DebugText"];
-            Console.WriteLine(DebugText);
 
-            From_TextBox = Request.Form["From_TextBox"];
-            Console.WriteLine(From_TextBox);
-            To_TextBox = Request.Form["To_TextBox"];
-            Console.WriteLine(To_TextBox);
         }
 
     }     
