@@ -18,44 +18,44 @@ namespace FlightFinder.Pages {
     {
         #region flight_table
         List<string> F_ID = new List<string>();
-        public string[] Flight_ID;
+        static public string[] Flight_ID;
         List<string> D_City = new List<string>();
-        public string[] Departure_City;
+        static public string[] Departure_City;
         List<string> A_City = new List<string>();
-        public string[] Arrival_City;
+        static public string[] Arrival_City;
         List<string> D_Time = new List<string>();
-        public string[] Departure_Time;
+        static public string[] Departure_Time;
         List<string> A_Time = new List<string>();
-        public string[] Arrival_Time;
+        static public string[] Arrival_Time;
         List<string> F_Date = new List<string>();
-        public string[] Flight_Date;
+        static public string[] Flight_Date;
         List<string> A_Name = new List<string>();
-        public string[] Airline_Name;
+        public static string[] Airline_Name;
         List<string> A_Registration = new List<string>();
-        public string[] Aircraft_Reg_Num;
+        static public string[] Aircraft_Reg_Num;
         List<string> A_Type = new List<string>();
-        public string[] Aircraft_Type;
+        static public string[] Aircraft_Type;
         List<string> F_Distance = new List<string>();
-        public string[] Flight_Distance;
+        static public string[] Flight_Distance;
         List<string> E_F_Time = new List<string>();
-        public string[] E_Flight_Time;
+        static public string[] E_Flight_Time;
         List<string> T_Seats = new List<string>();
-        public string[] Total_Seats;
+        static public string[] Total_Seats;
         List<string> O_Seats = new List<string>();
-        public string[] Open_Seats;
+        static public string[] Open_Seats;
         #endregion
 
         #region card_list
         public int ListSize = 0;
         List<string> C_Num = new List<string>();
-        public string[] Card_Number;
+        static public string[] Card_Number;
         #endregion
 
-        public string User_ID;
-        public string Seats_Reserved;
-        public string LastFour_Card;
+        static public string User_ID;
+        static public string Seats_Reserved;
+        static public string LastFour_Card;
 
-        int tempNum = 0;
+        static int tempNum = 0;
 
         public void OnGet() {
             Flight_ID = Request.Query["Flight_ID"];
@@ -80,29 +80,29 @@ namespace FlightFinder.Pages {
                 while (rdr.Read()) {
 
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
-                    this.Flight_ID = F_ID.ToArray();
+                    Flight_ID = F_ID.ToArray();
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
-                    this.Departure_City = D_City.ToArray();
+                    Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
-                    this.Arrival_City = A_City.ToArray();
+                    Arrival_City = A_City.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
-                    this.Flight_Date = F_Date.ToArray();
+                    Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
-                    this.Departure_Time = D_Time.ToArray();
+                    Departure_Time = D_Time.ToArray();
                     A_Time.Add(string.Format("{0}", rdr["arrival_time"].ToString()));
-                    this.Arrival_Time = A_Time.ToArray();
+                    Arrival_Time = A_Time.ToArray();
                     E_F_Time.Add(string.Format("{0}", rdr["estimated_flight_time"].ToString()));
-                    this.E_Flight_Time = E_F_Time.ToArray();
+                    E_Flight_Time = E_F_Time.ToArray();
                     A_Registration.Add(string.Format("{0}", rdr["aircraft_registration"].ToString()));
-                    this.Aircraft_Reg_Num = A_Registration.ToArray();
+                    Aircraft_Reg_Num = A_Registration.ToArray();
                     A_Type.Add(string.Format("{0}", rdr["aircraft_type"].ToString()));
-                    this.Aircraft_Type = A_Type.ToArray();
+                    Aircraft_Type = A_Type.ToArray();
                     F_Distance.Add(string.Format("{0} miles", rdr["flight_distance"].ToString()));
-                    this.Flight_Distance = F_Distance.ToArray();
+                    Flight_Distance = F_Distance.ToArray();
                     T_Seats.Add(string.Format("{0}", rdr["total_seats"].ToString()));
-                    this.Total_Seats = T_Seats.ToArray();
+                    Total_Seats = T_Seats.ToArray();
                     O_Seats.Add(string.Format("{0}", rdr["open_seats"].ToString()));
-                    this.Open_Seats = O_Seats.ToArray();
+                    Open_Seats = O_Seats.ToArray();
                 }
             }
             catch (Exception ex) {
@@ -125,7 +125,7 @@ namespace FlightFinder.Pages {
                 while (rdr.Read()) {
 
                     C_Num.Add(string.Format("{0}", rdr["card_number"].ToString()));
-                    this.Card_Number = C_Num.ToArray();
+                    Card_Number = C_Num.ToArray();
                     Card_Number[ListSize] = Card_Number[ListSize].Substring(Card_Number[ListSize].Length - 4); // Get last 4 digits of the card number
 
                     ++ListSize;

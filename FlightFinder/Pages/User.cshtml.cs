@@ -96,7 +96,7 @@ namespace FlightFinder.Pages
             try {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM flight, saved_flights WHERE user_id = {User_ID} AND saved_flights.flight_id = flight.flight_id", conn);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM flight, saved_flights WHERE user_id = {this.User_ID} AND saved_flights.flight_id = flight.flight_id", conn);
                 cmd.CommandType = CommandType.Text;
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
