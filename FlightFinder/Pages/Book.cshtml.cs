@@ -54,16 +54,16 @@ namespace FlightFinder.Pages {
         static public string User_ID;
         static public string Seats_Reserved;
         static public string LastFour_Card;
+        static public int MaxSeats = 0;
 
-        static int tempNum = 0;
 
         public void OnGet() {
             Flight_ID = Request.Query["Flight_ID"];
-            tempNum = Int32.Parse(Flight_ID[0]);
             User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
             Console.WriteLine($"You are reserving a flight with internal ID: {Flight_ID[0]}");
             FlightTableFill();
             CardListFill();
+            MaxSeats = Int32.Parse(Open_Seats[0]);
         }
 
         public void FlightTableFill() {
@@ -138,11 +138,12 @@ namespace FlightFinder.Pages {
         }
 
         public void BookFlight() {
+            LastFour_Card = Request.Form["card"];
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
-            string txtcmd = $"INSERT INTO saved_flights (User_ID, Flight_ID, Seats_Reserved) " +
+            string txtcmd = $"INSERT INTO booked_flights (User_ID, Flight_ID, Seats_Reserved, LastFourCard) " +
                 $"VALUES (@User_ID, @Flight_ID )";
             MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
             cmd.CommandType = CommandType.Text;
@@ -160,18 +161,15 @@ namespace FlightFinder.Pages {
         public async Task<IActionResult> OnPost(string submit) { 
             if (submit[0] == 'C') { 
                 Console.WriteLine("DEBUG - Confirm Booking");
-                //BookFlight();
+                BookFlight();
                 return Redirect($"/Flights");
             }
             else if (submit[0] == 'N') {
                 Console.WriteLine("DEBUG - New Card");
-                Console.WriteLine(tempNum);
-                return Page();
-                //return Redirect($"/Payment?Flight_ID={tempNum}");
+                return Redirect($"/Payment?Flight_ID={Flight_ID[0]}");
             }
             else {
                 Console.WriteLine("DEBUG - Error");
-                // error text
                 return RedirectToPage();
             }
         }

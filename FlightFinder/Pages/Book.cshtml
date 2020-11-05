@@ -49,7 +49,7 @@
 </a>
     <div>
         <b>Select payment method:</b>
-        <select name="card" id="card">
+        <select name ="card" id="card">
             @for (int i = 0; i < Model.ListSize; ++i) {
                 <option value="@Pages.BookModel.Card_Number[i]">Visa @Pages.BookModel.Card_Number[i]</option>
             }
@@ -61,6 +61,16 @@
             </form>
         </div>
     </div>
+
+    <div>
+        <b>Select seats to reserve:</b>
+        <select name="card" id="card">
+            @for (int i = 0; i < BookModel.MaxSeats; ++i) {
+                <option value="@i">@(i+1)</option>
+            }
+        </select>
+    </div>
+    <br />
 
     <form id="confirm" method="post">
         <div>

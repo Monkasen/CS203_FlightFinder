@@ -1,0 +1,20 @@
+﻿.btn-link {
+    height: 15px;
+    justify-content: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: lightgray;
+    font-family: 'Segoe UI';
+}
+
+.payment {
+    width: 382px;
+    overflow: hidden;
+    margin: auto;
+    padding: 80px;
+    background: #ffffff;
+    border-radius: 15px;
+}
