@@ -46,11 +46,13 @@ namespace FlightFinder.Pages
 
         public int TableSize = 0;
 
+        public int NumNullBoxes;
+
         public string From_TextBox { get; set; }
 
         public string To_TextBox { get; set; }
 
-        public DateTime? DepartDate_TextBox { get; set; }
+        public string DepartDate_TextBox { get; set; }
 
         public string Airline_TextBox { get; set; }
 
@@ -81,26 +83,7 @@ namespace FlightFinder.Pages
             DataTable dataSet = new DataTable();
 
 
-            if (!String.IsNullOrEmpty(Request.Form["From_TextBox"]))
-            {
-                From_TextBox = Request.Form["From_TextBox"];
-            }
-
-            if (!String.IsNullOrEmpty(Request.Form["To_TextBox"]))
-            {
-                To_TextBox = Request.Form["To_TextBox"];
-            }
-            if (!String.IsNullOrEmpty(Request.Form["DepartDate_TextBox"]))
-            {
-                DepartDate_TextBox = DateTime.Parse(Request.Form["DepartDate_TextBox"]);
-            }
-            if (!String.IsNullOrEmpty(Request.Form["Airline_TextBox"]))
-            {
-                Airline_TextBox = Request.Form["Airline_TextBox"];
-            }
-            
-
-            string cmdtxt = $"SELECT * FROM flight WHERE Departure_Airport = '{this.From_TextBox}' OR Departure_City = '{this.From_TextBox}' OR Arrival_City = '{this.To_TextBox}' OR Arrival_Airport = '{this.To_TextBox}';";
+            string cmdtxt = CreateQuery();
             MySqlCommand cmd = new MySqlCommand(cmdtxt, conn);
             cmd.CommandType = CommandType.Text;
             adapter.SelectCommand = cmd;
@@ -151,6 +134,112 @@ namespace FlightFinder.Pages
                 conn.Dispose();
                 return true;
             }
+        }
+
+        public string CreateQuery()
+        {
+            string cmd = "SELECT * FROM flight WHERE Total_Seats > 0";
+            string s1 = "";
+            string s2 = "";
+            string s3 = "";
+            string s4 = "";
+            string s5 = "";
+            string s6 = "";
+
+            if (!string.IsNullOrEmpty(Request.Form["From_TextBox"]))
+            {
+                From_TextBox = Request.Form["From_TextBox"];
+                s1 += $" AND Departure_Airport = '{this.From_TextBox}' OR Departure_City = '{this.From_TextBox}'";
+            }
+            else
+            {
+                ++NumNullBoxes;
+            }
+            if (!string.IsNullOrEmpty(Request.Form["To_TextBox"]))
+            {
+                To_TextBox = Request.Form["To_TextBox"];
+                s2 += $" AND Arrival_Airport = '{this.To_TextBox}' OR Arrival_City = '{this.To_TextBox}'";
+            }
+            else
+            {
+                ++NumNullBoxes;
+            }
+            if (!string.IsNullOrEmpty(Request.Form["DepartDate_TextBox"]))
+            {
+                DepartDate_TextBox = Request.Form["DepartDate_TextBox"];
+                s3 += $" AND Flight_Date = '{this.DepartDate_TextBox}'";
+            }
+            else
+            {
+                ++NumNullBoxes;
+            }
+            if (!string.IsNullOrEmpty(Request.Form["Airline_TextBox"]))
+            {
+                Airline_TextBox = Request.Form["Airline_TextBox"];
+                s4 += $" AND Airline = '{this.Airline_TextBox}'";
+            }
+            else
+            { 
+                ++NumNullBoxes;
+            }
+            if (!string.IsNullOrEmpty(Request.Form["Depart_Time_TextBox"]))
+            {
+                Depart_Time_TextBox = Request.Form["Depart_Time_TextBox"];
+                s5 += $" AND Departure_Time = '{this.Depart_Time_TextBox}'";
+            }
+            else
+            {
+                ++NumNullBoxes; 
+            }
+            if (!string.IsNullOrEmpty(Request.Form["Arrival_Time_TextBox"]))
+            {
+                Arrival_Time_TextBox = Request.Form["Arrival_Time_TextBox"];
+                s6 += $" AND Arrival_Time = '{this.Arrival_Time_TextBox}";
+            }
+            else
+            {
+                ++NumNullBoxes;
+            }
+            if (NumNullBoxes == 6)
+            {
+                cmd += ";";
+                return cmd;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(s1))
+                {
+                    cmd += s1;
+                }
+                if(!string.IsNullOrEmpty(s2))
+                {
+                    cmd += s2;
+                }
+                if (!string.IsNullOrEmpty(s3))
+                {
+                    cmd += s3;
+                }
+                if (!string.IsNullOrEmpty(s4))
+                {
+                    cmd += s4;
+                }
+                if (!string.IsNullOrEmpty(s5))
+                {
+                    cmd += s5;
+                }
+                if (!string.IsNullOrEmpty(s6))
+                {
+                    cmd += s6;
+                }
+                cmd += ";";
+                return cmd;
+            }
+            
+        }
+
+        public string ConfigureString()
+        {
+            return "poop";
         }
       
         public void TableFill() {
