@@ -56,9 +56,9 @@ namespace FlightFinder.Pages
 
         public string Airline_TextBox { get; set; }
 
-        public string Depart_Time_TextBox { get; set; }
+        public DateTime? Depart_Time_TextBox { get; set; }
 
-        public string Arrival_Time_TextBox { get; set; }
+        public DateTime? Arrival_Time_TextBox { get; set; }
 
         public string DebugText { get; set; }
 
@@ -184,8 +184,9 @@ namespace FlightFinder.Pages
             }
             if (!string.IsNullOrEmpty(Request.Form["Depart_Time_TextBox"]))
             {
-                Depart_Time_TextBox = Request.Form["Depart_Time_TextBox"];
-                s5 += $" AND Departure_Time = '{this.Depart_Time_TextBox}'";
+                Depart_Time_TextBox = DateTime.Parse(Request.Form["Depart_Time_TextBox"]);
+                string time = string.Format("{0:t}", Depart_Time_TextBox);
+                s5 += $" AND Departure_Time = '{time}'";
             }
             else
             {
@@ -193,8 +194,9 @@ namespace FlightFinder.Pages
             }
             if (!string.IsNullOrEmpty(Request.Form["Arrival_Time_TextBox"]))
             {
-                Arrival_Time_TextBox = Request.Form["Arrival_Time_TextBox"];
-                s6 += $" AND Arrival_Time = '{this.Arrival_Time_TextBox}";
+                Arrival_Time_TextBox = DateTime.Parse(Request.Form["Arrival_Time_TextBox"]);
+                string time = string.Format("{0:t}", Arrival_Time_TextBox);
+                s6 += $" AND Arrival_Time = '{time}'";
             }
             else
             {
