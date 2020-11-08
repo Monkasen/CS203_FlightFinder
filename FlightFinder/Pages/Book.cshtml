@@ -49,7 +49,8 @@
 </a>
     <div>
         <b>Select payment method:</b>
-        <select name ="card" id="card">
+        <select name="card" id="card">
+            <option value=0>---</option>
             @for (int i = 0; i < Model.ListSize; ++i) {
                 <option value="@Pages.BookModel.Card_Number[i]">Visa @Pages.BookModel.Card_Number[i]</option>
             }

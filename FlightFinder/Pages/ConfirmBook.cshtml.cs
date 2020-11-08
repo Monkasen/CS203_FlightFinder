@@ -12,9 +12,11 @@ using FlightFinder.Data;
 using Microsoft.EntityFrameworkCore;
 using FlightFinder.Model;
 using System.Security.Cryptography.X509Certificates;
+using System.Net.Mail;
 
-namespace FlightFinder.Pages {
-    public class BookModel : PageModel
+namespace FlightFinder.Pages
+{
+    public class ConfirmBookModel : PageModel
     {
         #region flight_table
         List<string> F_ID = new List<string>();
@@ -45,28 +47,46 @@ namespace FlightFinder.Pages {
         static public string[] Open_Seats;
         #endregion
 
-        #region card_list
-        public int ListSize = 0;
-        List<string> C_Num = new List<string>();
-        static public string[] Card_Number;
-        #endregion
-
         static public string User_ID;
-        static public string Seats_Reserved = "1";
-        static public string LastFour_Card = "0000";
-        static public int MaxSeats = 0;
+        static public string Seats_Reserved;
+        static public string LastFour_Card;
 
+        static public string User_Email;
 
         public void OnGet() {
-            Flight_ID = Request.Query["Flight_ID"];
             User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
-            Console.WriteLine($"You are reserving a flight with internal ID: {Flight_ID[0]}");
+            Flight_ID = Request.Query["Flight_ID"];
+            Seats_Reserved = Request.Query["Seats"];
+            LastFour_Card = Request.Query["Card_ID"];
+
             FlightTableFill();
-            CardListFill();
-            MaxSeats = Int32.Parse(Open_Seats[0]);
         }
 
-        public void FlightTableFill() {
+        public void SendConfirmationEmail() {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("flightfinder20@gmail.com");
+            mail.To.Add("ndougan23@gmail.com"); // TEMPORARY VALUE TO STORE EMAIL, DEFAULTS TO MINE, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
+            mail.Subject = "Test Mail";
+            mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {Seats_Reserved} seat(s) for this flight." +
+                $" You made this reservation using a card ending in {LastFour_Card}.";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+        }
+
+        public async Task<IActionResult> OnPost(string submit) {
+            Console.WriteLine("DEBUG - Confirm Booking");
+            SendConfirmationEmail();
+            return Redirect($"/Flights");
+        }
+
+        public void FlightTableFill()
+        {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
@@ -109,69 +129,6 @@ namespace FlightFinder.Pages {
                 Console.WriteLine("{oops - {0}", ex.Message);
             }
             conn.Dispose();
-        }
-
-        public void CardListFill() {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
-            MySqlConnection conn = new MySqlConnection(connectionString);
-
-            try {
-                conn.Open();
-
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM payment_card WHERE payment_card.user_id = {User_ID}", conn);
-                cmd.CommandType = CommandType.Text;
-                MySqlDataReader rdr = cmd.ExecuteReader();
-
-                while (rdr.Read()) {
-
-                    C_Num.Add(string.Format("{0}", rdr["card_number"].ToString()));
-                    Card_Number = C_Num.ToArray();
-                    Card_Number[ListSize] = Card_Number[ListSize].Substring(Card_Number[ListSize].Length - 4); // Get last 4 digits of the card number
-
-                    ++ListSize;
-                }
-            }
-            catch (Exception ex) {
-                Console.WriteLine("{oops - {0}", ex.Message);
-            }
-            conn.Dispose();
-        }
-
-        public void BookFlight() {
-            LastFour_Card = Request.Form["card"];
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-            string txtcmd = $"INSERT INTO booked_flights (User_ID, Flight_ID, Seats_Reserved, LastFourCard) " +
-                $"VALUES (@User_ID, @Flight_ID )";
-            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
-            cmd.CommandType = CommandType.Text;
-
-            cmd.Parameters.AddWithValue("@User_ID", 1); // THIS IS WHERE WE ASSIGN WHAT USER BOOKS THE FLIGHT, RIGHT NOW IT DEFAULTS TO USER 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            cmd.Parameters.AddWithValue("@Flight_ID", Flight_ID);
-            cmd.Parameters.AddWithValue("@Seats_Reserved", Seats_Reserved);
-            cmd.Parameters.AddWithValue("@LastFour_Card", LastFour_Card);
-            cmd.Prepare();
-            cmd.ExecuteReader();
-
-            conn.Dispose();
-        }
-
-        public async Task<IActionResult> OnPost(string submit) { 
-            if (submit[0] == 'C') { 
-                Console.WriteLine("DEBUG - Confirm Booking");
-                //BookFlight();
-                return Redirect($"/ConfirmBook?Flight_ID={Flight_ID[0]}&Seats={Seats_Reserved}&Card_ID={LastFour_Card}");
-            }
-            else if (submit[0] == 'N') {
-                Console.WriteLine("DEBUG - New Card");
-                return Redirect($"/Payment?Flight_ID={Flight_ID[0]}");
-            }
-            else {
-                Console.WriteLine("DEBUG - Error");
-                return RedirectToPage();
-            }
         }
     }
 }

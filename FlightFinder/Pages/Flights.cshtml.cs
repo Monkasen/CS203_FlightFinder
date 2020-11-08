@@ -236,11 +236,6 @@ namespace FlightFinder.Pages
             }
             
         }
-
-        public string ConfigureString()
-        {
-            return "poop";
-        }
       
         public void TableFill() {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";

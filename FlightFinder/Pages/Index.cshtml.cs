@@ -18,13 +18,8 @@ namespace FlightFinder.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            Console.WriteLine("debug");
-            if (true) {
-                return Redirect("/Flights");
-            }
-            else {
-                return Page();
-            }
+            Console.WriteLine("DEBUG - Search");
+            return Redirect("/Flights");
         }
     }
 }

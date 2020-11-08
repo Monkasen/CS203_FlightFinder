@@ -66,11 +66,12 @@
                 <th scope="col">Flight Date</th>
                 <th scope="col">Departure Time</th>
                 <th scope="col">Arrival Time</th>
+                <th scope="col">Airline Name</th>
                 <th scope="col">Estimated Flight Time</th>
                 <th scope="col">Registration Number</th>
                 <th scope="col">Aircraft Type</th>
                 <th scope="col">Flight Distance</th>
-                <th scope="col">Total Seats</th>
+                <!--<th scope="col">Total Seats</th>-->
                 <th scope="col">Open Seats</th>
                 <th scope="col">Save Flight</th>
                 <th scope="col">Book Flight</th>
@@ -78,30 +79,31 @@
         </thead>
         <tbody>
             @for (int i = 0; i < @Model.TableSize; ++i) {
-                <tr>
-                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
-                    <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
-                    <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
-                    <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
-                    <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
-                    <td>
-                        <form id="save-flight" method="post">
-                            <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form id="save-flight" method="post">
-                            <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
+                <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
+                <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
+                <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
+                <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
+                <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
+                <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
+                <!--<td>@Html.DisplayFor(m => m.Total_Seats[i])</td>-->
+                <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                <td>
+                    <form id="save-flight" method="post">
+                        <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
+                    </form>
+                </td>
+                <td>
+                    <form id="save-flight" method="post">
+                        <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
+                    </form>
+                </td>
+            </tr>
             }
         </tbody>
     </table>

@@ -63,7 +63,7 @@ namespace FlightFinder.Pages
         }
 
         public async Task<IActionResult> OnPost() {
-            AddCardToDB();
+            //AddCardToDB();
             return Redirect($"/Book?Flight_ID={Flight_ID}");
         }
     }

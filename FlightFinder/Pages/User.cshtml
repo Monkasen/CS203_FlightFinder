@@ -5,16 +5,47 @@
 }
 
 <body>
-    <a class="nav-item">
-        <label>Current User ID: @Html.DisplayFor(m => m.User_ID)</label> <!--Display current user logged in-->
-    </a>
+    <form id="send-email" method="post">
+        <button class="btn btn-info" name="submit" type="submit" value="S">Send Email</button>
+    </form>
+
+    <div class="text-center">
+        <label>
+            <b style="font-size:30px">User Info</b>
+        </label>
+    </div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">User_ID</th>
+                <th scope="col">User_Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">First_Name</th>
+                <th scope="col">Last_Name</th>
+                <th scope="col">Account_Creation_Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">@Html.DisplayFor(m => Model.User_ID)</th>
+                <td>@Html.DisplayFor(m => Model.User_Email[0])</td>
+                <td>@Html.DisplayFor(m => Model.User_Username[0])</td>
+                <td>@Html.DisplayFor(m => Model.User_Password[0])</td>
+                <td>@Html.DisplayFor(m => Model.First_Name[0])</td>
+                <td>@Html.DisplayFor(m => Model.Last_Name[0])</td>
+                <td>@Html.DisplayFor(m => Model.Account_Creation_Date[0])</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br /><br />
 
     <div class="text-center">
         <label>
             <b style="font-size:30px">Booked Flights</b>
         </label>
     </div>
-
     <table class="table">
         <thead class="thead-dark">
             <tr>
