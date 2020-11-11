@@ -34,21 +34,33 @@
                 <br />
                 <div class="airline-element">
                     <b class="text-airline">Airline</b>
-                    <img class="calendar-icon" src="~/css/images/airline.png" />
+                    <img class="airline-icon" src="~/css/images/airline.png" />
                     <input type="text" asp-for="Airline_TextBox" placeholder="Airline" />
                 </div>
             </div>
             <div class="third-element">
                 <div class="depart-time-element">
                     <b class="text-depart-time">Departure Time</b>
-                    <img class="calendar-icon" src="~/css/images/time.jpg" />
-                    <input type="time" asp-for="Depart_Time_TextBox"/>
+                    <img class="time-icon" src="~/css/images/time.png" />
+                    <input type="time" asp-for="Depart_Time_TextBox" />
                 </div>
                 <br />
                 <div class="arrival-time-element">
                     <b class="text-arrival-time">Arrival Time</b>
-                    <img class="calendar-icon" src="~/css/images/time.jpg" />
+                    <img class="time-icon" src="~/css/images/time.png" />
                     <input type="time" asp-for="Arrival_Time_TextBox" />
+                </div>
+            </div>
+            <div class="fourth-element">
+                <div class="reg-num-element">
+                    <b class="text-reg-num">Registration #</b>
+                    <img class="time-icon" src="~/css/images/registration.icon.png" />
+                    <input type="text" asp-for="Registration_Num_TextBox" />
+                </div>
+                <br />
+                <div class="aircraft-type-element">
+                    <b class="text-aircraft-type">Aircraft Type</b>
+                    <input type="text" asp-for="AircraftType_TextBox" />
                 </div>
             </div>
             <div>
