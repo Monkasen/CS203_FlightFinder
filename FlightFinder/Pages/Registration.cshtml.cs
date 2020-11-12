@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using FlightFinder.Data;
 using Microsoft.EntityFrameworkCore;
-using FlightFinder.Model;
 using System.Security.Cryptography.X509Certificates;
 
 

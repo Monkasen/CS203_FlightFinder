@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using FlightFinder.Data;
 using Microsoft.EntityFrameworkCore;
-using FlightFinder.Model;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Mail;
 
@@ -47,11 +46,15 @@ namespace FlightFinder.Pages
         static public string[] Open_Seats;
         #endregion
 
-        static public string User_ID;
-        static public string Seats_Reserved;
-        static public string LastFour_Card;
+        List<string> U_Email = new List<string>();
+        public string[] User_Email; 
 
-        static public string User_Email;
+        static public string User_ID;
+        public string Seats_Reserved;
+        public string LastFour_Card;
+
+        static string StaticSeats;
+        static string StaticCard;
 
         public void OnGet() {
             User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
@@ -59,33 +62,13 @@ namespace FlightFinder.Pages
             Seats_Reserved = Request.Query["Seats"];
             LastFour_Card = Request.Query["Card_ID"];
 
+            StaticSeats = Seats_Reserved;
+            StaticCard = LastFour_Card;
+
             FlightTableFill();
         }
 
-        public void SendConfirmationEmail() {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("flightfinder20@gmail.com");
-            mail.To.Add("ndougan23@gmail.com"); // TEMPORARY VALUE TO STORE EMAIL, DEFAULTS TO MINE, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
-            mail.Subject = "Test Mail";
-            mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {Seats_Reserved} seat(s) for this flight." +
-                $" You made this reservation using a card ending in {LastFour_Card}.";
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
-        }
-
-        public async Task<IActionResult> OnPost(string submit) {
-            Console.WriteLine("DEBUG - Confirm Booking");
-            SendConfirmationEmail();
-            return Redirect($"/Flights");
-        }
-
-        public void FlightTableFill()
+        private void FlightTableFill()
         {
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -129,6 +112,74 @@ namespace FlightFinder.Pages
                 Console.WriteLine("{oops - {0}", ex.Message);
             }
             conn.Dispose();
+        }
+
+        public void SendConfirmationEmail() {
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+            mail.From = new MailAddress("flightfinder20@gmail.com");
+            //mail.To.Add($"{GetUserEmail()}");
+            mail.To.Add($"ndougan23@gmail.com"); // TEMPORARY VALUE TO STORE EMAIL, DEFAULTS TO MINE, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
+            mail.Subject = "Test Mail";
+            mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {StaticSeats} seat(s) for this flight." +
+                $" You made this reservation using a card ending in {StaticCard}.";
+
+            SmtpServer.Port = 587;
+            SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
+            SmtpServer.EnableSsl = true;
+
+            SmtpServer.Send(mail);
+        }
+
+        private string GetUserEmail() {
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            try {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM user WHERE user_id = {User_ID}", conn);
+                cmd.CommandType = CommandType.Text;
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read()) {
+                    U_Email.Add(string.Format("{0}", rdr["user_email"].ToString()));
+                    User_Email = U_Email.ToArray();
+                }
+            }
+            catch (Exception ex) {
+                Console.WriteLine("{oops - {0}", ex.Message);
+            }
+            conn.Dispose();
+
+            return User_Email[0];
+        }
+
+        public void BookFlight() {
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string txtcmd = $"INSERT INTO booked_flights (User_ID, Flight_ID, Seats_Reserved, LastFour_Card) " +
+                $"VALUES (@User_ID, @Flight_ID, @Seats_Reserved, @LastFour_Card )";
+            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Parameters.AddWithValue("@User_ID", User_ID);
+            cmd.Parameters.AddWithValue("@Flight_ID", Flight_ID[0]);
+            cmd.Parameters.AddWithValue("@Seats_Reserved", StaticSeats);
+            cmd.Parameters.AddWithValue("@LastFour_Card", StaticCard);
+            cmd.Prepare();
+            cmd.ExecuteReader();
+
+            conn.Dispose();
+        }
+        public async Task<IActionResult> OnPost(string submit) {
+            Console.WriteLine("DEBUG - Confirm Booking");
+            BookFlight();
+            SendConfirmationEmail();
+            return Redirect($"/Flights");
         }
     }
 }

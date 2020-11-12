@@ -30,7 +30,7 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">@Html.DisplayFor(m =>BookModel.Flight_ID[0])</th>
+                <th scope="row">@Html.DisplayFor(m => BookModel.Flight_ID[0])</th>
                 <td>@Html.DisplayFor(m => BookModel.Departure_City[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Arrival_City[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Flight_Date[0])</td>
@@ -42,39 +42,42 @@
                 <td>@Html.DisplayFor(m => BookModel.Flight_Distance[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Total_Seats[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Open_Seats[0])</td>
-            </tr>        
+            </tr>
 
         </tbody>
     </table>
 </a>
-    <div>
+       
+
+<div>
+    <form id="confirm" method="post" runat="server">
+
         <b>Select payment method:</b>
-        <select name="card" id="card">
-            <option value=0>---</option>
+        <select id="Cards" name="Cards" asp-for="LastFour_Card">
+            <option value="">---</option>
             @for (int i = 0; i < Model.ListSize; ++i) {
                 <option value="@Pages.BookModel.Card_Number[i]">Visa @Pages.BookModel.Card_Number[i]</option>
             }
         </select>
 
-        <div>
-            <form id="card" method="post">
-                <button class="btn btn-info" name="submit" type="submit" value="N">Add New Card</button>
-            </form>
-        </div>
-    </div>
+        <br /><br />
 
-    <div>
         <b>Select seats to reserve:</b>
-        <select name="card" id="card">
+        <select id="Seats" name="Seats" asp-for="Seats_Reserved">
             @for (int i = 0; i < BookModel.MaxSeats; ++i) {
-                <option value="@i">@(i+1)</option>
+                <option value="@(i+1)">@(i+1)</option>
             }
         </select>
-    </div>
-    <br />
 
-    <form id="confirm" method="post">
-        <div>
-            <button class="btn btn-success" name="submit" type="submit" value="C">Confirm Booking</button>
-        </div>
+        <button class="btn btn-success" name="submit" type="submit" value="C">Confirm Booking</button>
+
     </form>
+</div>
+
+<div>
+    <form id="card" method="post" runat="server">
+        <button class="btn btn-info" name="submit" type="submit" value="N">Add New Card</button>
+    </form>
+</div>
+
+

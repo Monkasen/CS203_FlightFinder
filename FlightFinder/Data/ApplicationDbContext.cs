@@ -1,5 +1,4 @@
-﻿using FlightFinder.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +11,5 @@ namespace FlightFinder.Data {
 
         }
 
-        //public DbSet<Flight> Flight { get; set; }
     }
 }

@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using FlightFinder.Data;
 using Microsoft.EntityFrameworkCore;
-using FlightFinder.Model;
 using System.Security.Cryptography.X509Certificates;
 
 namespace FlightFinder.Pages {
@@ -51,16 +50,13 @@ namespace FlightFinder.Pages {
         static public string[] Card_Number;
         #endregion
 
-        static public string User_ID;
-        static public string Seats_Reserved = "1";
-        static public string LastFour_Card = "0000";
+        static public string User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
+        public string Seats_Reserved;
+        public string LastFour_Card;
         static public int MaxSeats = 0;
-
 
         public void OnGet() {
             Flight_ID = Request.Query["Flight_ID"];
-            User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
-            Console.WriteLine($"You are reserving a flight with internal ID: {Flight_ID[0]}");
             FlightTableFill();
             CardListFill();
             MaxSeats = Int32.Parse(Open_Seats[0]);
@@ -137,31 +133,11 @@ namespace FlightFinder.Pages {
             conn.Dispose();
         }
 
-        public void BookFlight() {
-            LastFour_Card = Request.Form["card"];
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-            string txtcmd = $"INSERT INTO booked_flights (User_ID, Flight_ID, Seats_Reserved, LastFourCard) " +
-                $"VALUES (@User_ID, @Flight_ID )";
-            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
-            cmd.CommandType = CommandType.Text;
-
-            cmd.Parameters.AddWithValue("@User_ID", 1); // THIS IS WHERE WE ASSIGN WHAT USER BOOKS THE FLIGHT, RIGHT NOW IT DEFAULTS TO USER 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            cmd.Parameters.AddWithValue("@Flight_ID", Flight_ID);
-            cmd.Parameters.AddWithValue("@Seats_Reserved", Seats_Reserved);
-            cmd.Parameters.AddWithValue("@LastFour_Card", LastFour_Card);
-            cmd.Prepare();
-            cmd.ExecuteReader();
-
-            conn.Dispose();
-        }
-
         public async Task<IActionResult> OnPost(string submit) { 
             if (submit[0] == 'C') { 
                 Console.WriteLine("DEBUG - Confirm Booking");
-                //BookFlight();
+                LastFour_Card = Request.Form["Cards"];
+                Seats_Reserved = Request.Form["Seats"];
                 return Redirect($"/ConfirmBook?Flight_ID={Flight_ID[0]}&Seats={Seats_Reserved}&Card_ID={LastFour_Card}");
             }
             else if (submit[0] == 'N') {

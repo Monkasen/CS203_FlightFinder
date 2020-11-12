@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
 using FlightFinder.Data;
 using Microsoft.EntityFrameworkCore;
-using FlightFinder.Model;
 using System.Security.Cryptography.X509Certificates;
 
 namespace FlightFinder.Pages
@@ -322,6 +321,7 @@ namespace FlightFinder.Pages
                 Console.WriteLine("DEBUG - Save");
                 SaveFlightToDB(parsedID);
                 TableFill();
+                return Page();
             }
             else if (submit[0] == 'F') { // ...or filtered through.
                 Console.WriteLine("DEBUG - Filter");
@@ -332,8 +332,6 @@ namespace FlightFinder.Pages
                 Console.WriteLine("DEBUG - Error");
                 return Redirect("/Error");
             }
-
-            return Page();
         }
 
         public void DebugCommand() {
