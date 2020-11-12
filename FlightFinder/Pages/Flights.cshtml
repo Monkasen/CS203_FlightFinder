@@ -9,8 +9,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/flights.css">
 </head>
 
-<html>
-<body>
+<body>  
     <div class="search">
         <form id="search" method="post" onsubmit="return true">
             <div class="first-element">
@@ -35,21 +34,33 @@
                 <br />
                 <div class="airline-element">
                     <b class="text-airline">Airline</b>
-                    <img class="calendar-icon" src="~/css/images/airline.png" />
+                    <img class="airline-icon" src="~/css/images/airline.png" />
                     <input type="text" asp-for="Airline_TextBox" placeholder="Airline" />
                 </div>
             </div>
             <div class="third-element">
                 <div class="depart-time-element">
                     <b class="text-depart-time">Departure Time</b>
-                    <img class="calendar-icon" src="~/css/images/time.jpg" />
+                    <img class="time-icon" src="~/css/images/time.png" />
                     <input type="time" asp-for="Depart_Time_TextBox" />
                 </div>
                 <br />
                 <div class="arrival-time-element">
                     <b class="text-arrival-time">Arrival Time</b>
-                    <img class="calendar-icon" src="~/css/images/time.jpg" />
+                    <img class="time-icon" src="~/css/images/time.png" />
                     <input type="time" asp-for="Arrival_Time_TextBox" />
+                </div>
+            </div>
+            <div class="fourth-element">
+                <div class="reg-num-element">
+                    <b class="text-reg-num">Registration #</b>
+                    <img class="time-icon" src="~/css/images/registration.icon.png" />
+                    <input type="text" asp-for="Registration_Num_TextBox" />
+                </div>
+                <br />
+                <div class="aircraft-type-element">
+                    <b class="text-aircraft-type">Aircraft Type</b>
+                    <input type="text" asp-for="AircraftType_TextBox" />
                 </div>
             </div>
             <div>
@@ -57,7 +68,7 @@
             </div>
         </form>
     </div>
-
+    
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -80,36 +91,32 @@
         </thead>
         <tbody>
             @for (int i = 0; i < @Model.TableSize; ++i) {
-                <tr>
-                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
-                    <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
-                    <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
-                    <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
-                    <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
-                    <!--<td>@Html.DisplayFor(m => m.Total_Seats[i])</td>-->
-                    <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
-                    <td>
-                        <form id="save-flight" method="post">
-                            <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form id="save-flight" method="post">
-                            <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
-                        </form>
-                    </td>
-                </tr>
+            <tr>
+                <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
+                <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
+                <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
+                <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
+                <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
+                <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
+                <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
+                <!--<td>@Html.DisplayFor(m => m.Total_Seats[i])</td>-->
+                <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                <td>
+                    <form id="save-flight" method="post">
+                        <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
+                    </form>
+                </td>
+                <td>
+                    <form id="save-flight" method="post">
+                        <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
+                    </form>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
-
-    
-
 </body>
-</html>

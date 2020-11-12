@@ -59,6 +59,10 @@ namespace FlightFinder.Pages
 
         public DateTime? Arrival_Time_TextBox { get; set; }
 
+        public string Registration_Num_TextBox { get; set; }
+
+        public string AircraftType_TextBox { get; set; }
+
         public string DebugText { get; set; }
 
         public void OnGet() {
@@ -144,6 +148,8 @@ namespace FlightFinder.Pages
             string s4 = "";
             string s5 = "";
             string s6 = "";
+            string s7 = "";
+            string s8 = "";
 
             if (!string.IsNullOrEmpty(Request.Form["From_TextBox"]))
             {
@@ -201,7 +207,27 @@ namespace FlightFinder.Pages
             {
                 ++NumNullBoxes;
             }
-            if (NumNullBoxes == 6)
+            if (!string.IsNullOrEmpty(Request.Form["Registration_Num_TextBox"]))
+            {
+                Registration_Num_TextBox = Request.Form["Registration_Num_TextBox"];
+                s6 += $" AND Aircraft_Registration = '{this.Registration_Num_TextBox}'";
+            }
+            else
+            {
+                ++NumNullBoxes;
+            }
+            if (!string.IsNullOrEmpty(Request.Form["AircraftType_TextBox"]))
+            {
+                AircraftType_TextBox = Request.Form["AircraftType_TextBox"];
+                s6 += $" AND Aircraft_Type = '{this.AircraftType_TextBox}'";
+            }
+            else
+            {
+                ++NumNullBoxes;
+            }
+
+
+            if (NumNullBoxes == 8)
             {
                 cmd += ";";
                 return cmd;
@@ -231,6 +257,14 @@ namespace FlightFinder.Pages
                 if (!string.IsNullOrEmpty(s6))
                 {
                     cmd += s6;
+                }
+                if (!string.IsNullOrEmpty(s7))
+                {
+                    cmd += s7;
+                }
+                if (!string.IsNullOrEmpty(s8))
+                {
+                    cmd += s8;
                 }
                 cmd += ";";
                 return cmd;

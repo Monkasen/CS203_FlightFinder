@@ -3,16 +3,28 @@
     width: auto;
 }
 
+.search b {
+    
+}
+
+
 .second-element {
     position: relative;
+    /*will need to add more spacing between the textboxes*/
     left: 270px;
-    bottom: 85px;
+    bottom: 87px;
 }
 
 .third-element {
     position: relative;
     left: 570px;
-    bottom: 168px;
+    bottom: 175px;
+}
+
+.fourth-element {
+    position: relative;
+    left: 860px;
+    bottom: 265px;
 }
 
 .to .text-to {
@@ -20,75 +32,95 @@
 }
 
 .airline-element .text-airline {
-    padding-right: 15px;
+    padding-right: 30px;
 }
 
 .arrival-time-element .text-arrival-time {
     padding-right: 25px;
 }
 
+.aircraft-type-element .text-aircraft-type {
+    padding-right: 30px;
+}
+
 
 .btn.btn-success  {
     position: relative;
-    left: 900px;
-    bottom: 251px;
+    left: 1172px;
+    bottom: 350px;
 }
 
 /*
+    icons
+*/
+img.search-icon {
+    height: 20px;
+    width: 20px;
+}
+
+img.calendar-icon {
+    height: 20px;
+    width: 20px;
+}
+
+img.airline-icon {
+    height: 20px;
+    width: 20px;
+}
+
+img.time-icon {
+    height: 20px;
+    width: 20px;
+}
+/*
     Textboxes
 */
-#Airline_TextBox.airline {
-    border: 2px solid;
+
+#Arrival_Time_TextBox {
+    border: 3px solid;
+    border-radius: 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+}
+#Airline_TextBox {
+    border: 3px solid;
+    border-radius: 5px;
+    width: 170px;
+}
+
+#Depart_Time_TextBox {
+    border: 3px solid;
     border-radius: 5px;
     padding-right: 10px;
     margin-right: 10px;
 }
 
-#Depart_Time_TextBox.depart-time {
-    border: 2px solid;
+#From_TextBox {
+    border: 3px solid;
     border-radius: 5px;
-    padding-right: 10px;
+    
+}
+
+#To_TextBox {
+    border: 3px solid;
+    border-radius: 5px;
+    
+}
+
+#DepartDate_TextBox {
+    border: 3px solid;
+    border-radius: 5px;
     margin-right: 10px;
 }
 
-#Arrival_Time_TextBox.arrival-time {
-    border: 2px solid;
+#Registration_Num_TextBox {
+    border: 3px solid;
     border-radius: 5px;
-    padding-right: 10px;
-    margin-right: 10px;
+    width: 100px;
 }
 
-.notification {
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
-    max-width: 400px;
-    padding: 6px;
-    background: #808080;
-    color: #ffffff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+#AircraftType_TextBox {
+    border: 3px solid;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s, top 0.5s, visibility 0.5s;
-}
-
-.notification--visible {
-    top: 20px;
-    opacity: 1;
-    visibility: visible;
-}
-
-.notification--success {
-    background: #28A745;
-}
-
-.notification--error {
-    background: #DC3545;
+    width: 100px;
 }
