@@ -11,12 +11,6 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">
-                    <img class="flight-finder-icon" src="~/css/images/logo_small.png" />FlightFinder
-                </a>
-                <a class="navbar-brand" asp-area="" asp-page="/Login">
-                    <img class="account-icon" src="~/css/images/user.png" />
-                </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -36,9 +30,28 @@
                     </ul>
                 </div>
             </div>
-
-        </nav>
-        
+            <a class="navbar-brand mx-auto" asp-area="" asp-page="/Index">
+                <img class="flight-finder-icon" src="~/css/images/logo_small.png" />FlightFinder
+            </a>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-page="/Login">
+                            <img class="account-icon" src="~/css/images/user.png" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!--<div class="navbar-nav mx-auto">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img class="flight-finder-icon" src="~/css/images/logo_small.png" />
+                    FlightFinder
+                </a>
+            </div>
+            <a class="navbar-brand" asp-area="" asp-page="/Login">
+                <img class="account-icon" src="~/css/images/user.png" />
+            </a>-->
+        </nav> 
     </header>
     <div class="container">
         <main role="main" class="pb-3">
