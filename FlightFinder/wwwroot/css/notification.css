@@ -1,0 +1,33 @@
+﻿.notification {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: auto;
+    max-width: 400px;
+    padding: 6px;
+    background: #808080;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s, top 0.5s, visibility 0.5s;
+}
+
+.notification--visible {
+    top: 20px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.notification--success {
+    background: #28A745;
+}
+
+.notification--error {
+    background: #DC3545;
+}

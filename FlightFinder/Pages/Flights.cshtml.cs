@@ -4,6 +4,7 @@ using System.Data;
 using System.Configuration;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -16,12 +17,20 @@ namespace FlightFinder.Pages
 {
     public class FlightsModel : PageModel
     {
+        #region flight table variables
         List<string> F_ID = new List<string>();
         public string[] Flight_ID;
+
         List<string> D_City = new List<string>();
         public string[] Departure_City;
         List<string> A_City = new List<string>();
         public string[] Arrival_City;
+
+        List<string> D_Port = new List<string>();
+        public string[] Departure_Airport;
+        List<string> A_Port = new List<string>();
+        public string[] Arrival_Airport;
+
         List<string> D_Time = new List<string>();
         public string[] Departure_Time;
         List<string> A_Time = new List<string>();
@@ -42,9 +51,9 @@ namespace FlightFinder.Pages
         public string[] Total_Seats;
         List<string> O_Seats = new List<string>();
         public string[] Open_Seats;
-
+        #endregion
         public int TableSize = 0;
-
+        #region textbox variables
         public int NumNullBoxes;
 
         public string From_TextBox { get; set; }
@@ -62,8 +71,16 @@ namespace FlightFinder.Pages
         public string Registration_Num_TextBox { get; set; }
 
         public string AircraftType_TextBox { get; set; }
-
+        #endregion
         public string DebugText { get; set; }
+
+        public string NotificationSuccesful = "success";
+        public string NotificationText = "Flight succesfully saved!";
+
+        List<string> SF_U = new List<string>();
+        private string[] SF_User;
+        List<string> SF_F = new List<string>();
+        private string[] SF_Flight;
 
         public void OnGet() {
             TableFill();
@@ -134,6 +151,11 @@ namespace FlightFinder.Pages
 
                     TableSize++;
                 }
+
+                for (int i = 0; i < Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
+                    Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                }
+
                 conn.Dispose();
                 return true;
             }
@@ -287,10 +309,15 @@ namespace FlightFinder.Pages
                     
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
                     this.Flight_ID = F_ID.ToArray();
+
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
                     this.Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
                     this.Arrival_City = A_City.ToArray();
+                    D_Port.Add(string.Format("{0}", rdr["departure_city"].ToString()));
+                    this.Departure_Airport = D_Port.ToArray();
+                    A_Port.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
+                    this.Arrival_Airport = A_Port.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
                     this.Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
@@ -314,6 +341,11 @@ namespace FlightFinder.Pages
 
                     TableSize++;
                 }
+
+                for (int i = 0; i < Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
+                    Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                }
+
             }
             catch (Exception ex) {
                 Console.WriteLine("{oops - {0}", ex.Message);
@@ -321,7 +353,11 @@ namespace FlightFinder.Pages
             conn.Dispose(); 
         }
 
-        private void SaveFlightToDB(string ButtonValue) { // Saves specified flight ID to specified user ID         
+        private void SaveFlightToDB(string ButtonValue) { // Saves specified flight ID to specified user ID   
+            if (!CheckSaved("1", ButtonValue)) { // ALSO CHANGE USER VALUE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                return;
+            }
+
             const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -337,6 +373,41 @@ namespace FlightFinder.Pages
             cmd.ExecuteReader();
 
             conn.Dispose();
+        }
+
+        private bool CheckSaved(string U_ID, string F_ID) {
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM saved_flights", conn);
+            cmd.CommandType = CommandType.Text;
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read()) {
+                SF_U.Add(string.Format("{0}", rdr["user_id"].ToString()));
+                this.SF_User = SF_U.ToArray();
+                SF_F.Add(string.Format("{0}", rdr["flight_id"].ToString()));
+                this.SF_Flight = SF_F.ToArray();
+            }
+
+            for (int i = 0; i < SF_User.Length; ++i) { // Check to see if the flight is already saved
+                if (SF_User[i] == U_ID && SF_Flight[i] == F_ID) {
+                    return false;
+                }
+            }
+
+            conn.Dispose();
+            return true;
+        }
+
+        public string ConfigureNotification(string FlightValue) {
+            if (!CheckSaved("1", FlightValue)) { // ALSO CHANGE USER VALUE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                return "'Flight already saved!','error'";
+            }
+
+            return "'Flight succesfully saved!','success'";
         }
 
         public async Task<IActionResult> OnPost(string submit) {
@@ -355,6 +426,7 @@ namespace FlightFinder.Pages
                 Console.WriteLine("DEBUG - Save");
                 SaveFlightToDB(parsedID);
                 TableFill();
+                Thread.Sleep(3000);
                 return Page();
             }
             else if (submit[0] == 'F') { // ...or filtered through.

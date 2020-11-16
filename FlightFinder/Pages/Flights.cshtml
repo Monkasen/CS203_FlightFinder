@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model FlightFinder.Pages.FlightsModel
 @{
     ViewData["Title"] = "Flights";
@@ -7,9 +7,10 @@
 <head>
     <title>Flights</title>
     <link rel="stylesheet" type="text/css" href="~/css/flights.css">
+    <link rel="stylesheet" type="text/css" href="~/css/notification.css">
 </head>
 
-<body>  
+<body>
     <div class="search">
         <form id="search" method="post" onsubmit="return true">
             <div class="first-element">
@@ -68,7 +69,7 @@
             </div>
         </form>
     </div>
-    
+
     <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -91,32 +92,71 @@
         </thead>
         <tbody>
             @for (int i = 0; i < @Model.TableSize; ++i) {
-            <tr>
-                <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
-                <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
-                <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
-                <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
-                <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
-                <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
-                <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
-                <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
-                <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
-                <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
-                <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
-                <!--<td>@Html.DisplayFor(m => m.Total_Seats[i])</td>-->
-                <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
-                <td>
-                    <form id="save-flight" method="post">
-                        <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]">Save</button>
-                    </form>
-                </td>
-                <td>
-                    <form id="save-flight" method="post">
-                        <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
-                    </form>
-                </td>
-            </tr>
+                <tr>
+                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
+                    <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                    <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
+                    <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
+                    <!--<td>@Html.DisplayFor(m => m.Total_Seats[i])</td>-->
+                    <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                    <td>
+                        <form id="save-flight" method="post">
+                            <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]" onclick="Notification.show(@Model.ConfigureNotification(@Model.Flight_ID[i]))">Save</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form id="save-flight" method="post">
+                            <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
+                        </form>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
+
+    <script>
+        const Notification = {
+            init() {
+                this.hideTimeout = null;
+
+                this.el = document.createElement('div');
+                this.el.className = 'notification';
+                document.body.appendChild(this.el);
+            },
+
+            show(message, state) {
+                clearTimeout(this.hideTimeout);
+
+                this.el.textContent = message;
+                this.el.className = 'notification notification--visible';
+
+                if (state) {
+                    this.el.classList.add(`notification--${state}`)
+                }
+
+                this.hideTimeout = setTimeout(() => {
+                    this.el.classList.remove('notification--visible');
+                }, 3000);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => Notification.init());
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function (e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
 </body>

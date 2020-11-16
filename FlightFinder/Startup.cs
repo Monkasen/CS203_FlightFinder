@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MySqlConnector;
+using Microsoft.AspNetCore.Session;
 
 namespace FlightFinder {
     public class Startup {
+        public static CurrentUser CurrentUser = new CurrentUser();
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -19,10 +21,8 @@ namespace FlightFinder {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-        
             services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            //services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

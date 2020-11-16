@@ -4,10 +4,11 @@
     ViewData["Title"] = "User";
 }
 
-<body>
-    <form id="send-email" method="post">
-        <button class="btn btn-info" name="submit" type="submit" value="S">Send Email</button>
-    </form>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/notification.css">
+</head>
+
+<body onload="Notification.show(@Model.ConfigureNotification())">
 
     <div class="text-center">
         <label>
@@ -126,4 +127,34 @@
             }
         </tbody>
     </table>
+
+    <script>
+        const Notification = {
+            init() {
+                this.hideTimeout = null;
+
+                this.el = document.createElement('div');
+                this.el.className = 'notification';
+                document.body.appendChild(this.el);
+            },
+
+            show(message, state) {
+                clearTimeout(this.hideTimeout);
+
+                this.el.textContent = message;
+                this.el.className = 'notification notification--visible';
+
+                if (state) {
+                    this.el.classList.add(`notification--${state}`)
+                }
+
+                this.hideTimeout = setTimeout(() => {
+                    this.el.classList.remove('notification--visible');
+                }, @Model.NotificationTimeout);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => Notification.init());
+    </script>
+
 </body>

@@ -18,6 +18,8 @@ namespace FlightFinder.Pages
     public class UserModel : PageModel
     {
         public string User_ID;
+        public string NotificationStatus;
+        public int NotificationTimeout;
 
         #region user variables
         List<string> U_Email = new List<string>();
@@ -97,6 +99,10 @@ namespace FlightFinder.Pages
             User_ID = Request.Query["User_ID"];
             if (User_ID == null) { // If nothing is retrieved, default to user 1. Later set this to error page, or redirect to login page.
                 User_ID = "1";
+            }
+            NotificationStatus = Request.Query["Notification"];
+            if (NotificationStatus == null) {
+                NotificationStatus = "0";
             }
 
             UserTableFill();
@@ -237,22 +243,15 @@ namespace FlightFinder.Pages
             conn.Dispose();
         }
 
-        public async Task<IActionResult> OnPost() {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
-            mail.From = new MailAddress("flightfinder20@gmail.com");
-            mail.To.Add("ndougan23@gmail.com");
-            mail.Subject = "Test Mail";
-            mail.Body = "hello, you look very handsome today :)";
-
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
-            SmtpServer.EnableSsl = true;
-
-            SmtpServer.Send(mail);
-
-            return Page();
+        public string ConfigureNotification() {
+            if (NotificationStatus == "1") {
+                NotificationTimeout = 3000;
+                return "'Login successful!','success'";
+            }
+            else {
+                NotificationTimeout = 0;
+                return "'Welcome back!','success'";
+            }
         }
     }
 }

@@ -100,6 +100,10 @@ namespace FlightFinder.Pages {
                     O_Seats.Add(string.Format("{0}", rdr["open_seats"].ToString()));
                     Open_Seats = O_Seats.ToArray();
                 }
+
+                for (int i = 0; i < Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
+                    Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                }
             }
             catch (Exception ex) {
                 Console.WriteLine("{oops - {0}", ex.Message);

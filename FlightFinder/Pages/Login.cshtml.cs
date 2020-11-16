@@ -84,7 +84,9 @@ namespace FlightFinder
         {
             if (VerifyUser()) {
                 GetUserID();
-                return Redirect($"/User?User_ID={this.User_ID}");
+                Startup.CurrentUser.SetUser(User_ID);
+                Startup.CurrentUser.GetUser();
+                return Redirect($"/User?User_ID={this.User_ID}&Notification=1");
             }
             else 
             {
