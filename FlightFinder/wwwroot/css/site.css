@@ -2,10 +2,19 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-  
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    position: inherit;
+    visibility: visible;
+    right: 500px;
+}
+ul.navbar-nav {
+    width: auto;
+}
+
+div.navbar-nav.mx-auto {
+    right: 100px;
 }
 
 .nav-item {
@@ -14,10 +23,11 @@ a.navbar-brand {
 }
 
 /*Image next to Flight Finder*/
-img.flight-finder-icon{
+img.flight-finder-icon {
     border-radius: 50%;
     height: 80px;
     padding: 10px;
+    
 }
 
 img.account-icon {
@@ -26,10 +36,18 @@ img.account-icon {
     height: 70px;
     right: 3%;
     top: 18px;
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+}
+
+.navbar-collapse:hover .account-icon {
+    opacity: 0.3;
 }
 
 /*Search Bars*/
-.wrapper {
+/*.wrapper {
     padding: 10px;
 }
 .from-search {
@@ -64,7 +82,7 @@ img.calendar-icon {
     border-radius: 5px;
     padding-right: 10px;
     margin-right: 10px;
-}
+}*/
 
 
 
@@ -123,6 +141,7 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
+
 .footer {
   position: absolute;
   bottom: 0;

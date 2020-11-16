@@ -8,3 +8,15 @@ h2 {
     font-family: 'Segoe UI';
     font-size: 20px;
 }
+
+.container-center {
+    margin: 0;
+    padding: 0;
+    height: 335px;
+    width: 1575px;
+    right: 235px;
+    position: relative;
+    bottom: 15px;
+    background-image: linear-gradient(to left top, #d978d2, #cd8ee4, #c2a1f1, #bab2fa, #b7c2fe, #abccff, #a4d6ff, #a2deff, #8ee6ff, #7aedff, #68f5fe, #5ffbf3);
+}
+

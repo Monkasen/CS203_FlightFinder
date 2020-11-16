@@ -11,19 +11,21 @@
     <title>Home</title>
     <link rel="stylesheet" type="text/css" href="~/css/index.css">
 </head>
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <h2>Find your flight.</h2>
-
-    <br><br>
-
-    <form id="Login" method="post" action="">
-        <input type="text" asp-for="Search" placeholder="Type an arrival or destination city..." style="width: 300px;">
+<div class="container-center">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <h2>Find your flight.</h2>
 
         <br><br>
 
-        <div class="col-2 offset-5">
-            <input type="submit" value="Search" class="btn btn-primary form-control" />
-        </div>
-    </form>
+        <form id="Login" method="post" action="">
+            <input type="text" asp-for="Search" placeholder="Type an arrival or destination city..." style="width: 300px;">
+
+            <br><br>
+
+            <div class="col-2 offset-5">
+                <input type="submit" value="Search" class="btn btn-primary form-control" />
+            </div>
+        </form>
+    </div>
 </div>
