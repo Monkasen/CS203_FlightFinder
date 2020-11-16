@@ -26,7 +26,7 @@ namespace FlightFinder.Pages
         public string ErrorText { get; set; }
 
         public void OnGet() {
-            User_ID = "1"; // CHANGE THIS TO DYNAMIC USER ID!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            User_ID = Startup.CurrentUser.GetUser();
             ErrorText = "";
             Flight_ID = Request.Query["Flight_ID"];
             Console.WriteLine(Flight_ID);

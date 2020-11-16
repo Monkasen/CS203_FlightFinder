@@ -96,10 +96,7 @@ namespace FlightFinder.Pages
         
 
         public void OnGet() {
-            User_ID = Request.Query["User_ID"];
-            if (User_ID == null) { // If nothing is retrieved, default to user 1. Later set this to error page, or redirect to login page.
-                User_ID = "1";
-            }
+            User_ID = Startup.CurrentUser.GetUser();
             NotificationStatus = Request.Query["Notification"];
             if (NotificationStatus == null) {
                 NotificationStatus = "0";
@@ -252,6 +249,12 @@ namespace FlightFinder.Pages
                 NotificationTimeout = 0;
                 return "'Welcome back!','success'";
             }
+        }
+
+        public async Task<IActionResult> OnPost(){
+            Console.WriteLine("DEBUG - Log Out");
+            Startup.CurrentUser.SetUser("0");
+            return Redirect($"/Flights");
         }
     }
 }

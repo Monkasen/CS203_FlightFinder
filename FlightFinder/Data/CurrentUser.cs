@@ -14,5 +14,14 @@ namespace FlightFinder {
         public string GetUser() {
             return LoggedInUser;
         }
+
+        public string ConfigureLayout(){
+            if (LoggedInUser == "0") {
+                return "/Login";
+            }
+            else {
+                return "/User";
+            }
+        }
     }
 }

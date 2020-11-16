@@ -57,7 +57,7 @@ namespace FlightFinder.Pages
         static string StaticCard;
 
         public void OnGet() {
-            User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
+            User_ID = Startup.CurrentUser.GetUser();
             Flight_ID = Request.Query["Flight_ID"];
             Seats_Reserved = Request.Query["Seats"];
             LastFour_Card = Request.Query["Card_ID"];
@@ -123,8 +123,7 @@ namespace FlightFinder.Pages
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
             mail.From = new MailAddress("flightfinder20@gmail.com");
-            //mail.To.Add($"{GetUserEmail()}");
-            mail.To.Add($"ndougan23@gmail.com"); // TEMPORARY VALUE TO STORE EMAIL, DEFAULTS TO MINE, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
+            mail.To.Add($"{GetUserEmail()}");
             mail.Subject = "Test Mail";
             mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {StaticSeats} seat(s) for this flight." +
                 $" You made this reservation using a card ending in {StaticCard}.";

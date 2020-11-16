@@ -402,12 +402,25 @@ namespace FlightFinder.Pages
             return true;
         }
 
-        public string ConfigureNotification(string FlightValue) {
-            if (!CheckSaved("1", FlightValue)) { // ALSO CHANGE USER VALUE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                return "'Flight already saved!','error'";
-            }
+        public string ConfigureNotification(string FlightValue, string InputType) {
+            if (InputType == "Save") {
+                if (Startup.CurrentUser.GetUser() == "0") {
+                    return "'You must be logged in to save a flight!','error'";
+                }
+                if (!CheckSaved(Startup.CurrentUser.GetUser(), FlightValue)) { // ALSO CHANGE USER VALUE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    return "'Flight already saved!','error'";
+                }
 
-            return "'Flight succesfully saved!','success'";
+                return "'Flight succesfully saved!','success'";
+            }
+            else {
+                if (Startup.CurrentUser.GetUser() == "0") {
+                    return "'You must be logged in to book a flight!','error'";
+                }
+                else {
+                    return "'default text','error'";
+                }
+            }
         }
 
         public async Task<IActionResult> OnPost(string submit) {
@@ -420,11 +433,18 @@ namespace FlightFinder.Pages
 
             if (submit[0] == 'B') { // Determine if the flight is to be booked...
                 Console.WriteLine("DEBUG - Book");
+                if (Startup.CurrentUser.GetUser() == "0") {
+                    TableFill();
+                    Thread.Sleep(3000);
+                    return Page();
+                }
                 return Redirect($"/Book?Flight_ID={parsedID}");
             }
             else if (submit[0] == 'S') { // ...saved...
                 Console.WriteLine("DEBUG - Save");
-                SaveFlightToDB(parsedID);
+                if (Startup.CurrentUser.GetUser() != "0") {
+                    SaveFlightToDB(parsedID);
+                }
                 TableFill();
                 Thread.Sleep(3000);
                 return Page();
@@ -439,10 +459,5 @@ namespace FlightFinder.Pages
                 return Redirect("/Error");
             }
         }
-
-        public void DebugCommand() {
-
-        }
-
     }     
 }

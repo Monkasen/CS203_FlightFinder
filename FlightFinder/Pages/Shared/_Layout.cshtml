@@ -25,7 +25,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Flights">Flights</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/User">Profile</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="@FlightFinder.Startup.CurrentUser.ConfigureLayout()">Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -36,7 +36,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="navbar-brand" asp-area="" asp-page="/Login">
+                        <a class="navbar-brand" asp-area="" asp-page="@FlightFinder.Startup.CurrentUser.ConfigureLayout()">
                             <img class="account-icon" src="~/css/images/user.png" />
                         </a>
                     </li>

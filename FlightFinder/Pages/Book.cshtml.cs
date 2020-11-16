@@ -50,7 +50,7 @@ namespace FlightFinder.Pages {
         static public string[] Card_Number;
         #endregion
 
-        static public string User_ID = "1"; // TEMPORARY VALUE TO STORE USER ID, DEFAULTS TO NULL USER, LATER CHANGE TO WHATEVER USER IS BOOKING THE FLIGHT!!!!!!!!!!!!!!!!!!!
+        static public string User_ID = Startup.CurrentUser.GetUser();
         public string Seats_Reserved;
         public string LastFour_Card;
         static public int MaxSeats = 0;

@@ -42,7 +42,7 @@ namespace FlightFinder
 
             conn.Open();
 
-            string cmdText = $"SELECT * FROM user WHERE Username = '{this.Username}' AND Password = '{this.Password}' AND User_Email = '{this.User_Email}'";
+            string cmdText = $"SELECT * FROM user WHERE Username = '{Username}' AND Password = '{Password}' AND User_Email = '{User_Email}'";
             MySqlCommand cmd = new MySqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.Text;
             adapter.SelectCommand = cmd;
@@ -86,14 +86,12 @@ namespace FlightFinder
                 GetUserID();
                 Startup.CurrentUser.SetUser(User_ID);
                 Startup.CurrentUser.GetUser();
-                return Redirect($"/User?User_ID={this.User_ID}&Notification=1");
+                return Redirect($"/User?User_ID={User_ID}&Notification=1");
             }
-            else 
-            {
+            else {
                 ErrorText = "Login failed. Please try again.";
                 return Page();
-            }
-                
+            }  
         }
     }
 }

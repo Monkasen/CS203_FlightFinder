@@ -108,12 +108,12 @@
                     <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
                     <td>
                         <form id="save-flight" method="post">
-                            <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]" onclick="Notification.show(@Model.ConfigureNotification(@Model.Flight_ID[i]))">Save</button>
+                            <button class="btn btn-info" name="submit" type="submit" value="S$@Model.Flight_ID[i]" onclick="Notification.show(@Model.ConfigureNotification(@Model.Flight_ID[i], "Save"))">Save</button>
                         </form>
                     </td>
                     <td>
                         <form id="save-flight" method="post">
-                            <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]">Book</button>
+                            <button class="btn btn-primary" name="submit" type="submit" value="B$@Model.Flight_ID[i]" onclick="Notification.show(@Model.ConfigureNotification(@Model.Flight_ID[i], "Book"))">Book</button>
                         </form>
                     </td>
                 </tr>
