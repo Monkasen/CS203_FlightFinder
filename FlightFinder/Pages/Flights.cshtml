@@ -70,21 +70,21 @@
         </form>
     </div>
 
-    <table class="table">
+    <table class="flight-list-table">
         <thead class="thead">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Departure City</th>
+                <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                 <th scope="col">Arrival City</th>
                 <th scope="col">Flight Date</th>
                 <th scope="col">Departure Time</th>
                 <th scope="col">Arrival Time</th>
-                <th scope="col">Airline Name</th>
                 <th scope="col">Estimated Flight Time</th>
+                <th scope="col">Airline Name</th>
                 <th scope="col">Registration Number</th>
                 <th scope="col">Aircraft Type</th>
                 <th scope="col">Flight Distance</th>
-                <!--<th scope="col">Total Seats</th>-->
+                <th scope="col">Total Seats</th>
                 <th scope="col">Open Seats</th>
                 <th scope="col">Save Flight</th>
                 <th scope="col">Book Flight</th>
@@ -93,19 +93,18 @@
         <tbody>
             @for (int i = 0; i < @Model.TableSize; ++i) {
                 <tr>
-                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
-                    <div class="depart-city"><td>@Html.DisplayFor(m => m.Departure_City[i])</td></div>
-                    
-                    <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                    <td scope="row"><div class="departure-city-table">@Html.DisplayFor(m => m.Departure_Airport[i])</div>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                    <td><img class="go-to" src="~/css/images/arrow.png" /> </td>
+                    <td><div class="arrival-city-table">@Html.DisplayFor(m => m.Arrival_Airport[i])</div>@Html.DisplayFor(m => m.Arrival_City[i])</td>
                     <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
-                    <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                    <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => m.Departure_Time[i])</div></td>
+                    <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => m.Arrival_Time[i])</div></td>
                     <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
                     <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
                     <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
                     <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
                     <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
-                    <!--<td>@Html.DisplayFor(m => m.Total_Seats[i])</td>-->
+                    <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
                     <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
                     <td>
                         <form id="save-flight" method="post">

@@ -128,6 +128,10 @@ namespace FlightFinder.Pages
                     this.Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
                     this.Arrival_City = A_City.ToArray();
+                    D_Port.Add(string.Format("{0}", rdr["departure_airport"].ToString()));
+                    this.Departure_Airport = D_Port.ToArray();
+                    A_Port.Add(string.Format("{0}", rdr["arrival_airport"].ToString()));
+                    this.Arrival_Airport = A_Port.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
                     this.Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
@@ -314,9 +318,9 @@ namespace FlightFinder.Pages
                     this.Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
                     this.Arrival_City = A_City.ToArray();
-                    D_Port.Add(string.Format("{0}", rdr["departure_city"].ToString()));
+                    D_Port.Add(string.Format("{0}", rdr["departure_airport"].ToString()));
                     this.Departure_Airport = D_Port.ToArray();
-                    A_Port.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
+                    A_Port.Add(string.Format("{0}", rdr["arrival_airport"].ToString()));
                     this.Arrival_Airport = A_Port.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
                     this.Flight_Date = F_Date.ToArray();
