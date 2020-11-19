@@ -3,3 +3,12 @@
     left: 300px;
     bottom: 92px;
 }
+
+.btn.btn-success {
+    position: relative;
+    left: 80px;
+}
+
+.thead-reserving {
+    background-image: linear-gradient(to right top, #eeddf4, #d5ccf1, #b1beef, #81b3eb, #33a9e0);
+}

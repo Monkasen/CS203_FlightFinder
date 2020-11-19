@@ -24,3 +24,19 @@ body {
     background: #ffffff;
     border-radius: 15px;
 }
+
+input:hover {
+    background: #69BBFF;
+}
+
+input#User_Email {
+    border: 3px solid;
+}
+
+input#Username {
+    border: 3px solid;
+}
+
+input#Password {
+    border: 3px solid;
+}

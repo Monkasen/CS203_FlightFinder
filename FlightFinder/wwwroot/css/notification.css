@@ -31,3 +31,16 @@
 .notification--error {
     background: #DC3545;
 }
+
+.thead-user {
+    background-image: linear-gradient(to right top, #008cff, #00aaff, #00c3ff, #00dafc, #1ceeee);
+}
+
+.thead-booked {
+    background-image: linear-gradient(to right top, #008cff, #00aaff, #00c3ff, #00dafc, #1ceeee);
+}
+
+.thead-saved {
+    background-image: linear-gradient(to right top, #008cff, #00aaff, #00c3ff, #00dafc, #1ceeee);
+}
+

@@ -81,6 +81,9 @@ img.time-icon {
 /*
     Textboxes
 */
+input:hover {
+    background: lightgray;
+}
 
 #Arrival_Time_TextBox {
     border: 3px solid;
