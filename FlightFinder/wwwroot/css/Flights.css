@@ -7,7 +7,9 @@
     
 }
 
-
+thead.thead {
+    background-image: linear-gradient(to left top, #d978d2, #cd8ee4, #c2a1f1, #bab2fa, #b7c2fe, #abccff, #a4d6ff, #a2deff, #8ee6ff, #7aedff, #68f5fe, #5ffbf3);
+}
 .second-element {
     position: relative;
     /*will need to add more spacing between the textboxes*/
