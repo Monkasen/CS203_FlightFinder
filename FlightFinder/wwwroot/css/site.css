@@ -18,7 +18,8 @@ div.navbar-nav.mx-auto {
 }
 
 .nav-item {
-    right:5%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    right: 20%;
     top: 20px;
 }
 
@@ -27,7 +28,6 @@ img.flight-finder-icon {
     border-radius: 50%;
     height: 80px;
     padding: 10px;
-    
 }
 
 img.account-icon {

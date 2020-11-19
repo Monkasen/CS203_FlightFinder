@@ -13,17 +13,18 @@
 </head>
 <div class="container-center">
     <div class="text-center">
-        <h1 class="display-4">Welcome</h1>
-        <h2>Find your flight.</h2>
+        <h1 class="display-4"><span>Welcome</span></h1>
+        <h2><span>Find your flight.</span></h2>
 
         <br><br>
 
         <form id="Login" method="post" action="">
-            <input type="text" asp-for="Search" placeholder="Type an arrival or destination city..." style="width: 300px;">
-
+            <div class="topnav">
+                <input type="text" placeholder="Type an arrival or destination city...">
+            </div>
             <br><br>
 
-            <div class="col-2 offset-5">
+            <div class="search-button">
                 <input type="submit" value="Search" class="btn btn-primary form-control" />
             </div>
         </form>

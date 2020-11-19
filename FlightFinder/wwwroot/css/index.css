@@ -1,18 +1,26 @@
 ﻿body {
+    font-family: 'Segoe UI';
     margin: 0;
     padding: 0;
+}
+
+h1 {
     font-family: 'Segoe UI';
+    font-size: 60px;
+    color: rgba(0, 0, 0, 0.6);
+
 }
 
 h2 {
     font-family: 'Segoe UI';
     font-size: 20px;
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .container-center {
     margin: 0;
     padding: 0;
-    height: 335px;
+    height: 598px;
     width: 1575px;
     right: 235px;
     position: relative;
@@ -26,5 +34,24 @@ input#Search {
     background-color: white;
     background-position: 10px 5px;
     padding-left: 30px;
+}
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+    margin: auto;
+    width: 400px;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-button {
+    margin: auto;
+    max-width: 200px;
 }
 
