@@ -1,0 +1,91 @@
+﻿@page
+@model FlightFinder.Pages.UserSettingsModel
+@{
+    ViewData["Title"] = "User Settings";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/table.css">
+</head>
+
+<body>
+    <div class="text-center">
+        <label>
+            <b style="font-size:30px">User Info</b>
+        </label>
+    </div>
+    <table class="flight-list-table">
+        <thead class="thead-user">
+            <tr>
+                <th scope="col">User Email</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Account Creation Date</th>
+                <th scope="col">Notification Setting</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => Model.User_Email[0])</td>
+                <td>@Html.DisplayFor(m => Model.User_Username[0])</td>
+                <td>@Html.DisplayFor(m => Model.User_Password[0])</td>
+                <td>@Html.DisplayFor(m => Model.Account_Creation_Date[0])</td>
+                <td>@Html.DisplayFor(m => Model.Notif_Setting[0])</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="update-settings">
+        <form id="c-password" method="post" action="">
+            <label>
+                <b>
+                    Old Password
+                </b>
+            </label>
+            <input type="password" asp-for="Pass_Check" placeholder="Old Password">
+
+            <br>
+            <br>
+
+            <label>
+                <b>
+                    Password
+                </b>
+            </label>
+            <input type="password" asp-for="N_Password" placeholder="New Password">
+
+            <br>
+            <br>
+
+            <label>
+                <b>
+                    Confirm New Password
+                </b>
+            </label>
+            <input type="password" asp-for="C_N_Password" placeholder="Confirm New Password">
+
+            <br>
+            <br>
+
+            <label style="color:red">@Html.DisplayFor(m => m.ErrorText)</label>
+            <br />
+
+            <div class="notification-setting">
+                <br />
+
+                <b>Enable/Disable Notifcations:</b>
+                <select id="Notif" name="Notif" asp-for="NotificationSet">
+                    <option value="1">Enable</option>
+                    <option value="0">Disable</option>
+                </select>
+
+                <br>
+                <br>
+            </div>
+
+            <div>
+                <button class="btn btn-success" name="submit" type="submit" value="C">Confirm Changes</button>
+            </div>
+        </form>
+    </div>
+</body>

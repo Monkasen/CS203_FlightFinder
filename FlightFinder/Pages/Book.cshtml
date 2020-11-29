@@ -4,23 +4,27 @@
     ViewData["Title"] = "Booking";
 }
 
-<link rel="stylesheet" type="text/css" href="~/css/book.css">
+<head>
+    <link rel="stylesheet" type="text/css" href="~/css/table.css">
+    <link rel="stylesheet" type="text/css" href="~/css/book.css">
+</head>
 
 <a class="nav-item">
     <div class="text-center">
         <b style="font-size:30px">You are reserving seats for the following flight:</b> <!--Display current user logged in-->
     </div>
     <br />
-    <table class="table">
+    <table class="flight-list-table">
         <thead class="thead-reserving">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Departure City</th>
+                <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                 <th scope="col">Arrival City</th>
                 <th scope="col">Flight Date</th>
                 <th scope="col">Departure Time</th>
                 <th scope="col">Arrival Time</th>
                 <th scope="col">Estimated Flight Time</th>
+                <th scope="col">Airline Name</th>
                 <th scope="col">Registration Number</th>
                 <th scope="col">Aircraft Type</th>
                 <th scope="col">Flight Distance</th>
@@ -30,13 +34,14 @@
         </thead>
         <tbody>
             <tr>
-                <th scope="row">@Html.DisplayFor(m => BookModel.Flight_ID[0])</th>
-                <td>@Html.DisplayFor(m => BookModel.Departure_City[0])</td>
-                <td>@Html.DisplayFor(m => BookModel.Arrival_City[0])</td>
+                <td scope="row"><div class="departure-city-table">@Html.DisplayFor(m => BookModel.Departure_Airport[0])</div>@Html.DisplayFor(m => BookModel.Departure_City[0])</td>
+                <td><img class="go-to" src="~/css/images/arrow.png" /> </td>
+                <td><div class="arrival-city-table">@Html.DisplayFor(m => BookModel.Arrival_Airport[0])</div>@Html.DisplayFor(m => BookModel.Arrival_City[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Flight_Date[0])</td>
-                <td>@Html.DisplayFor(m => BookModel.Departure_Time[0])</td>
-                <td>@Html.DisplayFor(m => BookModel.Arrival_Time[0])</td>
+                <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => BookModel.Departure_Time[0])</div></td>
+                <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => BookModel.Arrival_Time[0])</div></td>
                 <td>@Html.DisplayFor(m => BookModel.E_Flight_Time[0])</td>
+                <td>@Html.DisplayFor(m => BookModel.Airline_Name[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Aircraft_Reg_Num[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Aircraft_Type[0])</td>
                 <td>@Html.DisplayFor(m => BookModel.Flight_Distance[0])</td>

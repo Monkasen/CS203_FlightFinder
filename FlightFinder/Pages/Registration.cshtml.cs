@@ -21,8 +21,7 @@ namespace FlightFinder.Pages
         public string User_Email { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
+        public string C_Password { get; set; }
         public string ErrorText { get; set; }
 
         public DateTime Account_Creation_Date { get; set; }
@@ -39,27 +38,27 @@ namespace FlightFinder.Pages
             Username = Request.Form["Username"];
             User_Email = Request.Form["User_Email"];
             Password = Request.Form["Password"];
-            First_Name = Request.Form["First_Name"];
-            Last_Name = Request.Form["Last_Name"];
             Account_Creation_Date = DateTime.Today;
 
-            if (Username == "" || User_Email == "" || Password == "") {
+            if (Username == "" || User_Email == "" || Password == "" || C_Password == "") {
                 ErrorText = "Not all required fields are completed. Please try again.";
+                return false;
+            }
+            if (C_Password != Password) {
+                ErrorText = "Passwords do not match. Please try again.";
                 return false;
             }
 
             conn.Open();
 
-            string txtcmd = $"INSERT INTO user (User_Email, Username, Password, First_Name, Last_Name, Account_Creation_Date) " +
-                $"VALUES (@User_Email, @Username, @Password, @First_Name, @Last_Name, @Account_Creation_Date )";
+            string txtcmd = $"INSERT INTO user (User_Email, Username, Password, Account_Creation_Date, Notification_Setting) " +
+                $"VALUES (@User_Email, @Username, @Password, @Account_Creation_Date, 1)";
             MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
             cmd.CommandType = CommandType.Text;
             
             cmd.Parameters.AddWithValue("@User_Email", User_Email);
             cmd.Parameters.AddWithValue("@Username", Username);
             cmd.Parameters.AddWithValue("@Password", Password);
-            cmd.Parameters.AddWithValue("@First_Name", First_Name);
-            cmd.Parameters.AddWithValue("@Last_Name", Last_Name);
             cmd.Parameters.AddWithValue("@Account_Creation_Date", Account_Creation_Date);
             cmd.Prepare();
             cmd.ExecuteReader();

@@ -28,21 +28,26 @@ namespace FlightFinder.Pages
         public string[] User_Username;
         List<string> U_Pword = new List<string>();
         public string[] User_Password;
-        List<string> F_Name = new List<string>();
-        public string[] First_Name;
-        List<string> L_Name = new List<string>();
-        public string[] Last_Name;
         List<string> A_C_Date = new List<string>();
         public string[] Account_Creation_Date;
+        List<string> N_Set = new List<string>();
+        public string[] Notif_Setting;
         #endregion
         #region booked_flights variables
         public int B_TableSize = 0;
         List<string> B_F_ID = new List<string>();
         public string[] B_Flight_ID;
+
         List<string> B_D_City = new List<string>();
         public string[] B_Departure_City;
         List<string> B_A_City = new List<string>();
         public string[] B_Arrival_City;
+
+        List<string> B_D_Port = new List<string>();
+        public string[] B_Departure_Airport;
+        List<string> B_A_Port = new List<string>();
+        public string[] B_Arrival_Airport;
+
         List<string> B_D_Time = new List<string>();
         public string[] B_Departure_Time;
         List<string> B_A_Time = new List<string>();
@@ -68,10 +73,17 @@ namespace FlightFinder.Pages
         public int TableSize = 0;
         List<string> F_ID = new List<string>();
         public string[] Flight_ID;
+
         List<string> D_City = new List<string>();
         public string[] Departure_City;
         List<string> A_City = new List<string>();
         public string[] Arrival_City;
+
+        List<string> D_Port = new List<string>();
+        public string[] Departure_Airport;
+        List<string> A_Port = new List<string>();
+        public string[] Arrival_Airport;
+
         List<string> D_Time = new List<string>();
         public string[] Departure_Time;
         List<string> A_Time = new List<string>();
@@ -123,16 +135,16 @@ namespace FlightFinder.Pages
                     U_Email.Add(string.Format("{0}", rdr["user_email"].ToString()));
                     User_Email = U_Email.ToArray();
                     U_Uname.Add(string.Format("{0}", rdr["username"].ToString()));
-                    User_Username = U_Email.ToArray();
+                    User_Username = U_Uname.ToArray();
                     U_Pword.Add(string.Format("{0}", rdr["password"].ToString()));
                     User_Password = U_Pword.ToArray();
-                    F_Name.Add(string.Format("{0}", rdr["first_name"].ToString()));
-                    First_Name = F_Name.ToArray();
-                    L_Name.Add(string.Format("{0}", rdr["last_name"].ToString()));
-                    Last_Name = L_Name.ToArray();
                     A_C_Date.Add(string.Format("{0}", rdr["account_creation_date"].ToString()));
                     Account_Creation_Date = A_C_Date.ToArray();
+                    N_Set.Add(string.Format("{0}", rdr["notification_setting"].ToString()));
+                    Notif_Setting = N_Set.ToArray();
                 }
+
+                Account_Creation_Date[0] = Account_Creation_Date[0].Remove(Account_Creation_Date[0].Length - 12, 12); // Remove "12:00:00 AM" from string
             }
             catch (Exception ex) {
                 Console.WriteLine("{oops - {0}", ex.Message);
@@ -157,9 +169,13 @@ namespace FlightFinder.Pages
                     B_F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
                     B_Flight_ID = B_F_ID.ToArray();
                     B_D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
-                    B_Departure_City = B_D_City.ToArray();
+                    this.B_Departure_City = B_D_City.ToArray();
                     B_A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
-                    B_Arrival_City = B_A_City.ToArray();
+                    this.B_Arrival_City = B_A_City.ToArray();
+                    B_D_Port.Add(string.Format("{0}", rdr["departure_airport"].ToString()));
+                    this.B_Departure_Airport = B_D_Port.ToArray();
+                    B_A_Port.Add(string.Format("{0}", rdr["arrival_airport"].ToString()));
+                    this.B_Arrival_Airport = B_A_Port.ToArray();
                     B_F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
                     B_Flight_Date = B_F_Date.ToArray();
                     B_D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
@@ -182,6 +198,10 @@ namespace FlightFinder.Pages
                     B_Open_Seats = B_O_Seats.ToArray();
 
                     B_TableSize++;
+                }
+
+                for (int i = 0; i < B_Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
+                    B_Flight_Date[i] = B_Flight_Date[i].Remove(B_Flight_Date[i].Length - 12, 12);
                 }
             }
             catch (Exception ex) {
@@ -207,9 +227,13 @@ namespace FlightFinder.Pages
                     F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
                     Flight_ID = F_ID.ToArray();
                     D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
-                    Departure_City = D_City.ToArray();
+                    this.Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
-                    Arrival_City = A_City.ToArray();
+                    this.Arrival_City = A_City.ToArray();
+                    D_Port.Add(string.Format("{0}", rdr["departure_airport"].ToString()));
+                    this.Departure_Airport = D_Port.ToArray();
+                    A_Port.Add(string.Format("{0}", rdr["arrival_airport"].ToString()));
+                    this.Arrival_Airport = A_Port.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
                     Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
@@ -233,6 +257,10 @@ namespace FlightFinder.Pages
 
                     TableSize++;
                 }
+
+                for (int i = 0; i < Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
+                    Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                }
             }
             catch (Exception ex) {
                 Console.WriteLine("{oops - {0}", ex.Message);
@@ -251,10 +279,17 @@ namespace FlightFinder.Pages
             }
         }
 
-        public async Task<IActionResult> OnPost(){
-            Console.WriteLine("DEBUG - Log Out");
-            Startup.CurrentUser.SetUser("0");
-            return Redirect($"/Flights");
+        public async Task<IActionResult> OnPost(string submit) {
+            if (submit == "L") {
+                Console.WriteLine("DEBUG - Log Out");
+                Startup.CurrentUser.SetUser("0");
+                return Redirect($"/Flights");
+            }
+            else if (submit == "S") {
+                Console.WriteLine("DEBUG - User Settings");
+                return Redirect($"/UserSettings");
+            }
+            return Page();
         }
     }
 }

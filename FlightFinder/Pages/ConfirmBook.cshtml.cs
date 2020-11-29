@@ -20,18 +20,25 @@ namespace FlightFinder.Pages
         #region flight_table
         List<string> F_ID = new List<string>();
         static public string[] Flight_ID;
+
         List<string> D_City = new List<string>();
         static public string[] Departure_City;
         List<string> A_City = new List<string>();
         static public string[] Arrival_City;
+
+        List<string> D_Port = new List<string>();
+        static public string[] Departure_Airport;
+        List<string> A_Port = new List<string>();
+        static public string[] Arrival_Airport;
+
         List<string> D_Time = new List<string>();
         static public string[] Departure_Time;
         List<string> A_Time = new List<string>();
         static public string[] Arrival_Time;
         List<string> F_Date = new List<string>();
         static public string[] Flight_Date;
-        List<string> A_Name = new List<string>();
-        public static string[] Airline_Name;
+        List<string> Air_Name = new List<string>();
+        static public string[] Airline_Name;
         List<string> A_Registration = new List<string>();
         static public string[] Aircraft_Reg_Num;
         List<string> A_Type = new List<string>();
@@ -88,6 +95,10 @@ namespace FlightFinder.Pages
                     Departure_City = D_City.ToArray();
                     A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
                     Arrival_City = A_City.ToArray();
+                    D_Port.Add(string.Format("{0}", rdr["departure_airport"].ToString()));
+                    Departure_Airport = D_Port.ToArray();
+                    A_Port.Add(string.Format("{0}", rdr["arrival_airport"].ToString()));
+                    Arrival_Airport = A_Port.ToArray();
                     F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
                     Flight_Date = F_Date.ToArray();
                     D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
@@ -96,6 +107,8 @@ namespace FlightFinder.Pages
                     Arrival_Time = A_Time.ToArray();
                     E_F_Time.Add(string.Format("{0}", rdr["estimated_flight_time"].ToString()));
                     E_Flight_Time = E_F_Time.ToArray();
+                    Air_Name.Add(string.Format("{0}", rdr["airline"].ToString()));
+                    Airline_Name = Air_Name.ToArray();
                     A_Registration.Add(string.Format("{0}", rdr["aircraft_registration"].ToString()));
                     Aircraft_Reg_Num = A_Registration.ToArray();
                     A_Type.Add(string.Format("{0}", rdr["aircraft_type"].ToString()));
@@ -119,20 +132,22 @@ namespace FlightFinder.Pages
         }
 
         public void SendConfirmationEmail() {
-            MailMessage mail = new MailMessage();
-            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            if (FlightFinder.Startup.CurrentUser.GetNotification()) { // If notifications are enabled, send the email
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
 
-            mail.From = new MailAddress("flightfinder20@gmail.com");
-            mail.To.Add($"{GetUserEmail()}");
-            mail.Subject = "Test Mail";
-            mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {StaticSeats} seat(s) for this flight." +
-                $" You made this reservation using a card ending in {StaticCard}.";
+                mail.From = new MailAddress("flightfinder20@gmail.com");
+                mail.To.Add($"{GetUserEmail()}");
+                mail.Subject = "Test Mail";
+                mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {StaticSeats} seat(s) for this flight." +
+                    $" You made this reservation using a card ending in {StaticCard}.";
 
-            SmtpServer.Port = 587;
-            SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
-            SmtpServer.EnableSsl = true;
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
+                SmtpServer.EnableSsl = true;
 
-            SmtpServer.Send(mail);
+                SmtpServer.Send(mail);
+            }
         }
 
         private string GetUserEmail() {

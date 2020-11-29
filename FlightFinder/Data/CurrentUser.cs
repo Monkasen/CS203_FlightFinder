@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 namespace FlightFinder {
     public class CurrentUser {
         public string LoggedInUser = "0";
+        public bool NotificationSetting = true; // True = notifications on, false = notifications off.
 
         public void SetUser(string input) {
             LoggedInUser = input;
@@ -22,6 +23,14 @@ namespace FlightFinder {
             else {
                 return "/User";
             }
+        }
+
+        public void SetNotification(bool input) {
+            NotificationSetting = input;
+        }
+
+        public bool GetNotification() {
+            return NotificationSetting;
         }
     }
 }

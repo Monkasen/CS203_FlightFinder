@@ -5,6 +5,7 @@
 }
 
 <head>
+    <link rel="stylesheet" type="text/css" href="~/css/table.css">
     <link rel="stylesheet" type="text/css" href="~/css/notification.css">
 </head>
 
@@ -15,27 +16,23 @@
             <b style="font-size:30px">User Info</b>
         </label>
     </div>
-    <table class="table">
+    <table class="flight-list-table">
         <thead class="thead-user">
             <tr>
-                <th scope="col">User_ID</th>
-                <th scope="col">User_Email</th>
+                <th scope="col">User Email</th>
                 <th scope="col">Username</th>
                 <th scope="col">Password</th>
-                <th scope="col">First_Name</th>
-                <th scope="col">Last_Name</th>
-                <th scope="col">Account_Creation_Date</th>
+                <th scope="col">Account Creation Date</th>
+                <th scope="col">Notification Setting</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <th scope="row">@Html.DisplayFor(m => Model.User_ID)</th>
                 <td>@Html.DisplayFor(m => Model.User_Email[0])</td>
                 <td>@Html.DisplayFor(m => Model.User_Username[0])</td>
                 <td>@Html.DisplayFor(m => Model.User_Password[0])</td>
-                <td>@Html.DisplayFor(m => Model.First_Name[0])</td>
-                <td>@Html.DisplayFor(m => Model.Last_Name[0])</td>
                 <td>@Html.DisplayFor(m => Model.Account_Creation_Date[0])</td>
+                <td>@Html.DisplayFor(m => Model.Notif_Setting[0])</td>
             </tr>
         </tbody>
     </table>
@@ -47,38 +44,46 @@
             <b style="font-size:30px">Booked Flights</b>
         </label>
     </div>
-    <table class="table">
+    <table class="flight-list-table">
         <thead class="thead-booked">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Departure City</th>
+                <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                 <th scope="col">Arrival City</th>
                 <th scope="col">Flight Date</th>
                 <th scope="col">Departure Time</th>
                 <th scope="col">Arrival Time</th>
                 <th scope="col">Estimated Flight Time</th>
+                <th scope="col">Airline Name</th>
                 <th scope="col">Registration Number</th>
                 <th scope="col">Aircraft Type</th>
                 <th scope="col">Flight Distance</th>
                 <th scope="col">Total Seats</th>
                 <th scope="col">Open Seats</th>
+                <th scope="col">Unbook Flight</th>
             </tr>
         </thead>
         <tbody>
             @for (int i = 0; i < @Model.B_TableSize; ++i) {
                 <tr>
-                    <th scope="row">@Html.DisplayFor(m => m.B_Flight_ID[i])</th>
-                    <td>@Html.DisplayFor(m => m.B_Departure_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Arrival_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Flight_Date[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Departure_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Arrival_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_E_Flight_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Aircraft_Reg_Num[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Aircraft_Type[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Flight_Distance[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Total_Seats[i])</td>
-                    <td>@Html.DisplayFor(m => m.B_Open_Seats[i])</td>
+                    <td scope="row"><div class="departure-city-table">@Html.DisplayFor(m => m.Departure_Airport[i])</div>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                    <td><img class="go-to" src="~/css/images/arrow.png" /> </td>
+                    <td><div class="arrival-city-table">@Html.DisplayFor(m => m.Arrival_Airport[i])</div>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
+                    <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => m.Departure_Time[i])</div></td>
+                    <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => m.Arrival_Time[i])</div></td>
+                    <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
+                    <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
+                    <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
+                    <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
+                    <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                    <td>
+                        <form id="save-flight" method="post">
+                            <button class="btn btn-info" name="submit" type="submit" value="UB$@Model.Flight_ID[i]">Unbook</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -91,42 +96,56 @@
             <b style="font-size:30px">Saved Flights</b>
         </label>
     </div>
-    <table class="table">
+    <table class="flight-list-table">
         <thead class="thead-saved">
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Departure City</th>
+                <th scope="col">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                 <th scope="col">Arrival City</th>
                 <th scope="col">Flight Date</th>
                 <th scope="col">Departure Time</th>
                 <th scope="col">Arrival Time</th>
                 <th scope="col">Estimated Flight Time</th>
+                <th scope="col">Airline Name</th>
                 <th scope="col">Registration Number</th>
                 <th scope="col">Aircraft Type</th>
                 <th scope="col">Flight Distance</th>
                 <th scope="col">Total Seats</th>
                 <th scope="col">Open Seats</th>
+                <th scope="col">Unsave Flight</th>
             </tr>
         </thead>
         <tbody>
             @for (int i = 0; i < @Model.TableSize; ++i) {
                 <tr>
-                    <th scope="row">@Html.DisplayFor(m => m.Flight_ID[i])</th>
-                    <td>@Html.DisplayFor(m => m.Departure_City[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_City[i])</td>
+                    <td scope="row"><div class="departure-city-table">@Html.DisplayFor(m => m.Departure_Airport[i])</div>@Html.DisplayFor(m => m.Departure_City[i])</td>
+                    <td><img class="go-to" src="~/css/images/arrow.png" /> </td>
+                    <td><div class="arrival-city-table">@Html.DisplayFor(m => m.Arrival_Airport[i])</div>@Html.DisplayFor(m => m.Arrival_City[i])</td>
                     <td>@Html.DisplayFor(m => m.Flight_Date[i])</td>
-                    <td>@Html.DisplayFor(m => m.Departure_Time[i])</td>
-                    <td>@Html.DisplayFor(m => m.Arrival_Time[i])</td>
+                    <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => m.Departure_Time[i])</div></td>
+                    <td><div class="arrival-departure-time-table">@Html.DisplayFor(m => m.Arrival_Time[i])</div></td>
                     <td>@Html.DisplayFor(m => m.E_Flight_Time[i])</td>
+                    <td>@Html.DisplayFor(m => m.Airline_Name[i])</td>
                     <td>@Html.DisplayFor(m => m.Aircraft_Reg_Num[i])</td>
                     <td>@Html.DisplayFor(m => m.Aircraft_Type[i])</td>
                     <td>@Html.DisplayFor(m => m.Flight_Distance[i])</td>
                     <td>@Html.DisplayFor(m => m.Total_Seats[i])</td>
                     <td>@Html.DisplayFor(m => m.Open_Seats[i])</td>
+                    <td>
+                        <form id="save-flight" method="post">
+                            <button class="btn btn-info" name="submit" type="submit" value="US$@Model.Flight_ID[i]">Unsave</button>
+                        </form>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
+
+    <form id="confirm" method="post">
+        <div>
+            <button class="btn btn-info" name="submit" type="submit" value="S">User Settings</button>
+        </div>
+    </form>
 
     <form id="confirm" method="post">
         <div>

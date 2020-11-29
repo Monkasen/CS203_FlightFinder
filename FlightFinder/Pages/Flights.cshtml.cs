@@ -76,12 +76,18 @@ namespace FlightFinder.Pages
 
         public string NotificationSuccesful = "success";
         public string NotificationText = "Flight succesfully saved!";
-
+        #region saved flight check
         List<string> SF_U = new List<string>();
         private string[] SF_User;
         List<string> SF_F = new List<string>();
         private string[] SF_Flight;
-
+        #endregion
+        #region booked flight check
+        List<string> BF_U = new List<string>();
+        private string[] BF_User;
+        List<string> BF_F = new List<string>();
+        private string[] BF_Flight;
+        #endregion
         public void OnGet() {
             TableFill();
         }
@@ -358,7 +364,7 @@ namespace FlightFinder.Pages
         }
 
         private void SaveFlightToDB(string ButtonValue) { // Saves specified flight ID to specified user ID   
-            if (!CheckSaved("1", ButtonValue)) { // ALSO CHANGE USER VALUE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            if (!CheckSaved(Startup.CurrentUser.GetUser(), ButtonValue)) { 
                 return;
             }
 
@@ -371,7 +377,7 @@ namespace FlightFinder.Pages
             MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
             cmd.CommandType = CommandType.Text;
 
-            cmd.Parameters.AddWithValue("@User_ID", 1); // THIS IS WHERE WE ASSIGN WHAT USER GETS THE SAVED FLIGHT, RIGHT NOW IT DEFAULTS TO USER 1!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            cmd.Parameters.AddWithValue("@User_ID", Startup.CurrentUser.GetUser()); 
             cmd.Parameters.AddWithValue("@Flight_ID", ButtonValue);
             cmd.Prepare();
             cmd.ExecuteReader();
@@ -406,12 +412,38 @@ namespace FlightFinder.Pages
             return true;
         }
 
+        private bool CheckBooked(string U_ID, string F_ID) {
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+
+            conn.Open();
+
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM booked_flights", conn);
+            cmd.CommandType = CommandType.Text;
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read()) {
+                BF_U.Add(string.Format("{0}", rdr["user_id"].ToString()));
+                this.BF_User = BF_U.ToArray();
+                BF_F.Add(string.Format("{0}", rdr["flight_id"].ToString()));
+                this.BF_Flight = BF_F.ToArray();
+            }
+
+            for (int i = 0; i < BF_User.Length; ++i) { // Check to see if the flight is already booked
+                if (BF_User[i] == U_ID && BF_Flight[i] == F_ID) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         public string ConfigureNotification(string FlightValue, string InputType) {
             if (InputType == "Save") {
                 if (Startup.CurrentUser.GetUser() == "0") {
                     return "'You must be logged in to save a flight!','error'";
                 }
-                if (!CheckSaved(Startup.CurrentUser.GetUser(), FlightValue)) { // ALSO CHANGE USER VALUE HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if (!CheckSaved(Startup.CurrentUser.GetUser(), FlightValue)) { 
                     return "'Flight already saved!','error'";
                 }
 
@@ -420,6 +452,9 @@ namespace FlightFinder.Pages
             else {
                 if (Startup.CurrentUser.GetUser() == "0") {
                     return "'You must be logged in to book a flight!','error'";
+                }
+                else if (!CheckBooked(Startup.CurrentUser.GetUser(), FlightValue)) {
+                    return "'Flight already booked!','error'";
                 }
                 else {
                     return "'default text','error'";
@@ -437,7 +472,7 @@ namespace FlightFinder.Pages
 
             if (submit[0] == 'B') { // Determine if the flight is to be booked...
                 Console.WriteLine("DEBUG - Book");
-                if (Startup.CurrentUser.GetUser() == "0") {
+                if (Startup.CurrentUser.GetUser() == "0" || !CheckBooked(Startup.CurrentUser.GetUser(), parsedID)) {
                     TableFill();
                     Thread.Sleep(3000);
                     return Page();
