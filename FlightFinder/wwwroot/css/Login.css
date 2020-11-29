@@ -12,7 +12,7 @@ body {
     margin: 0;
     padding: 0;
     background: rgb(104,133,255);
-    background: radial-gradient(circle, rgba(104,133,255,1) 0%, rgba(70,236,252,1) 100%);
+    background-image: linear-gradient(to top, #ddfffd, #d3fafd, #caf4fd, #c3eefe, #bee8fe, #b2e1fd, #a8d9fd, #9fd1fc, #8ac7fb, #73bdfb, #59b2fa, #37a8f9);
     font-family: 'Segoe UI';
 }
 
@@ -22,7 +22,6 @@ body {
     margin: auto;
     padding: 80px;
     background: #ffffff;
-    border-radius: 15px;
 }
 
 input:hover {
@@ -30,13 +29,19 @@ input:hover {
 }
 
 input#User_Email {
-    border: 3px solid;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 input#Username {
-    border: 3px solid;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 input#Password {
-    border: 3px solid;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }

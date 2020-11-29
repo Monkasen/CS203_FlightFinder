@@ -1,7 +1,7 @@
 ﻿body {
     margin: 0;
     padding: 0;
-    background-color: lightgray;
+    background-image: linear-gradient(to top, #f7ab72, #ff9295, #e68ac0, #a792de, #439ade);
     font-family: 'Segoe UI';
 }
 
@@ -12,4 +12,10 @@
     padding: 80px;
     background: #ffffff;
     border-radius: 15px;
+}
+
+input {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
