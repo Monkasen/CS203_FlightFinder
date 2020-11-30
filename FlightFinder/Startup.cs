@@ -6,10 +6,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Session;
+using FlightFinder.Pages;
 
 namespace FlightFinder {
     public class Startup {
+
         public static CurrentUser CurrentUser = new CurrentUser();
+        public static Search userSearch = new Search();
 
         public Startup(IConfiguration configuration)
         {

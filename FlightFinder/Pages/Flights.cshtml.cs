@@ -76,6 +76,7 @@ namespace FlightFinder.Pages
 
         public string NotificationSuccesful = "success";
         public string NotificationText = "Flight succesfully saved!";
+
         #region saved flight check
         List<string> SF_U = new List<string>();
         private string[] SF_User;
@@ -88,8 +89,96 @@ namespace FlightFinder.Pages
         List<string> BF_F = new List<string>();
         private string[] BF_Flight;
         #endregion
+
+        public string Search;
         public void OnGet() {
-            TableFill();
+            Search = Startup.userSearch.GetSearch();
+            if (Search != null)
+            {
+                Showsearch();
+                Page();
+            }
+            else
+            {
+                TableFill();
+            }
+        }
+
+        public void Showsearch()
+        {
+            TableSize = 0;
+            ModelState.Clear();
+            D_City.Clear();
+            A_City.Clear();
+            D_Time.Clear();
+            A_Time.Clear();
+            F_Date.Clear();
+            Air_Name.Clear();
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            DataTable dataSet = new DataTable();
+
+            string cmdtxt = $"SELECT * FROM flight WHERE Total_Seats > 0 AND Departure_Airport = '{this.Search}' OR Departure_City = '{this.Search}' OR Arrival_Airport = '{this.Search}' OR Arrival_City = '{this.Search}'";
+            MySqlCommand cmd = new MySqlCommand(cmdtxt, conn);
+            cmd.CommandType = CommandType.Text;
+            adapter.SelectCommand = cmd;
+            adapter.Fill(dataSet);
+
+            if (dataSet.Rows.Count < 1)
+            {
+                conn.Dispose();
+            }
+            else
+            {
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                for (int i = 0; i < dataSet.Rows.Count; i++)
+                {
+                    rdr.Read();
+                    F_ID.Add(string.Format("{0}", rdr["flight_id"].ToString()));
+                    this.Flight_ID = F_ID.ToArray();
+                    D_City.Add(string.Format("{0}", rdr["departure_city"].ToString()));
+                    this.Departure_City = D_City.ToArray();
+                    A_City.Add(string.Format("{0}", rdr["arrival_city"].ToString()));
+                    this.Arrival_City = A_City.ToArray();
+                    D_Port.Add(string.Format("{0}", rdr["departure_airport"].ToString()));
+                    this.Departure_Airport = D_Port.ToArray();
+                    A_Port.Add(string.Format("{0}", rdr["arrival_airport"].ToString()));
+                    this.Arrival_Airport = A_Port.ToArray();
+                    F_Date.Add(string.Format("{0}", rdr["flight_date"].ToString()));
+                    this.Flight_Date = F_Date.ToArray();
+                    D_Time.Add(string.Format("{0}", rdr["departure_time"].ToString()));
+                    this.Departure_Time = D_Time.ToArray();
+                    A_Time.Add(string.Format("{0}", rdr["arrival_time"].ToString()));
+                    this.Arrival_Time = A_Time.ToArray();
+                    E_F_Time.Add(string.Format("{0}", rdr["estimated_flight_time"].ToString()));
+                    this.E_Flight_Time = E_F_Time.ToArray();
+                    Air_Name.Add(string.Format("{0}", rdr["airline"].ToString()));
+                    this.Airline_Name = Air_Name.ToArray();
+                    A_Registration.Add(string.Format("{0}", rdr["aircraft_registration"].ToString()));
+                    this.Aircraft_Reg_Num = A_Registration.ToArray();
+                    A_Type.Add(string.Format("{0}", rdr["aircraft_type"].ToString()));
+                    this.Aircraft_Type = A_Type.ToArray();
+                    F_Distance.Add(string.Format("{0} miles", rdr["flight_distance"].ToString()));
+                    this.Flight_Distance = F_Distance.ToArray();
+                    T_Seats.Add(string.Format("{0}", rdr["total_seats"].ToString()));
+                    this.Total_Seats = T_Seats.ToArray();
+                    O_Seats.Add(string.Format("{0}", rdr["open_seats"].ToString()));
+                    this.Open_Seats = O_Seats.ToArray();
+
+                    TableSize++;
+                }
+
+                for (int i = 0; i < Flight_Date.Length; ++i)
+                { // Remove "12:00:00 AM" from string
+                    Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                }
+
+                conn.Dispose();
+            }
+
         }
 
         public bool FilterResults()
