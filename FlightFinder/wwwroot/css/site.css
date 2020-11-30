@@ -14,7 +14,8 @@ ul.navbar-nav {
 }
 
 div.navbar-nav.mx-auto {
-    right: 100px;
+    position: relative;
+    right: 105px;
 }
 
 .nav-item {
