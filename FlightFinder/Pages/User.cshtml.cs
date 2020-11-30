@@ -199,9 +199,12 @@ namespace FlightFinder.Pages
 
                     B_TableSize++;
                 }
-
-                for (int i = 0; i < B_Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
-                    B_Flight_Date[i] = B_Flight_Date[i].Remove(B_Flight_Date[i].Length - 12, 12);
+                if (B_TableSize > 0)
+                {
+                    for (int i = 0; i < B_Flight_Date.Length; ++i)
+                    { // Remove "12:00:00 AM" from string
+                        B_Flight_Date[i] = B_Flight_Date[i].Remove(B_Flight_Date[i].Length - 12, 12);
+                    }
                 }
             }
             catch (Exception ex) {
@@ -257,9 +260,12 @@ namespace FlightFinder.Pages
 
                     TableSize++;
                 }
-
-                for (int i = 0; i < Flight_Date.Length; ++i) { // Remove "12:00:00 AM" from string
-                    Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                if (TableSize > 0)
+                {
+                    for (int i = 0; i < TableSize; ++i)
+                    { // Remove "12:00:00 AM" from string
+                        Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
+                    }
                 }
             }
             catch (Exception ex) {

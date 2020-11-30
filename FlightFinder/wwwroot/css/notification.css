@@ -33,14 +33,14 @@
 }
 
 .thead-user {
-    background-image: linear-gradient(to right top, #008cff, #00aaff, #00c3ff, #00dafc, #1ceeee);
+    background-image: linear-gradient(to right, #f7e379, #ffc476, #ffa58d, #ff8fb2, #f689d9);
 }
 
 .thead-booked {
-    background-image: linear-gradient(to right top, #008cff, #00aaff, #00c3ff, #00dafc, #1ceeee);
+    background-image: linear-gradient(to right, #f7e379, #ffc476, #ffa58d, #ff8fb2, #f689d9);
 }
 
 .thead-saved {
-    background-image: linear-gradient(to right top, #008cff, #00aaff, #00c3ff, #00dafc, #1ceeee);
+    background-image: linear-gradient(to right, #f7e379, #ffc476, #ffa58d, #ff8fb2, #f689d9);
 }
 
