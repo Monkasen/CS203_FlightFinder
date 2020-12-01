@@ -6,7 +6,7 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: lightgray;
+    background-image: linear-gradient(to top, #d7f311, #acf455, #87f07f, #6ceaa0, #63e2b9, #4fd7c3, #47ccc9, #4bc0ca, #29b0ca, #00a0c8, #008fc4, #247dbc);
     font-family: 'Segoe UI';
 }
 

@@ -50,3 +50,7 @@ td {
     font-size: 18px;
     width: 80px;
 }
+
+.thead-reserving {
+    background: linear-gradient(to right, #a8c0ff, #3f2b96);
+}
