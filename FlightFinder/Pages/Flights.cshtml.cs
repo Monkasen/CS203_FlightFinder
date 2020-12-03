@@ -93,18 +93,16 @@ namespace FlightFinder.Pages
         public string Search;
         public void OnGet() {
             Search = Startup.userSearch.GetSearch();
-            if (Search != null)
-            {
-                Showsearch();
+            if (Search != null) {
+                ShowSearch();
                 Page();
             }
-            else
-            {
+            else {
                 TableFill();
             }
         }
 
-        public void Showsearch()
+        public void ShowSearch()
         {
             TableSize = 0;
             ModelState.Clear();

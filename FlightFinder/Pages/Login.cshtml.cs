@@ -86,7 +86,7 @@ namespace FlightFinder
                 GetUserID();
                 Startup.CurrentUser.SetUser(User_ID);
                 Startup.CurrentUser.GetUser();
-                return Redirect($"/User?User_ID={User_ID}&Notification=1");
+                return Redirect($"/User?User_ID={User_ID}");
             }
             else {
                 ErrorText = "Login failed. Please try again.";

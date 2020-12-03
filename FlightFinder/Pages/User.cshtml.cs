@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
@@ -17,9 +18,7 @@ namespace FlightFinder.Pages
 {
     public class UserModel : PageModel
     {
-        public string User_ID;
-        public string NotificationStatus;
-        public int NotificationTimeout;
+        public static string User_ID;
 
         #region user variables
         List<string> U_Email = new List<string>();
@@ -109,10 +108,6 @@ namespace FlightFinder.Pages
 
         public void OnGet() {
             User_ID = Startup.CurrentUser.GetUser();
-            NotificationStatus = Request.Query["Notification"];
-            if (NotificationStatus == null) {
-                NotificationStatus = "0";
-            }
 
             UserTableFill();
             BookedTableFill();
@@ -221,7 +216,7 @@ namespace FlightFinder.Pages
             try {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM flight, saved_flights WHERE user_id = {this.User_ID} AND saved_flights.flight_id = flight.flight_id", conn);
+                MySqlCommand cmd = new MySqlCommand($"SELECT * FROM flight, saved_flights WHERE user_id = {User_ID} AND saved_flights.flight_id = flight.flight_id", conn);
                 cmd.CommandType = CommandType.Text;
                 MySqlDataReader rdr = cmd.ExecuteReader();
 
@@ -260,10 +255,8 @@ namespace FlightFinder.Pages
 
                     TableSize++;
                 }
-                if (TableSize > 0)
-                {
-                    for (int i = 0; i < TableSize; ++i)
-                    { // Remove "12:00:00 AM" from string
+                if (TableSize > 0) {
+                    for (int i = 0; i < TableSize; ++i) { // Remove "12:00:00 AM" from string
                         Flight_Date[i] = Flight_Date[i].Remove(Flight_Date[i].Length - 12, 12);
                     }
                 }
@@ -274,27 +267,89 @@ namespace FlightFinder.Pages
             conn.Dispose();
         }
 
-        public string ConfigureNotification() {
-            if (NotificationStatus == "1") {
-                NotificationTimeout = 3000;
-                return "'Login successful!','success'";
+        public string ConfigureNotification(string InputType)
+        {
+            if (InputType == "Save") {
+                return "'Flight succesfully unsaved!','success'";
             }
             else {
-                NotificationTimeout = 0;
-                return "'Welcome back!','success'";
+                return "'Flight succesfully unbooked!','success'";
             }
         }
 
+        public void UnbookFlight(string ButtonValue) {
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string txtcmd = $"DELETE FROM booked_flights WHERE User_ID={User_ID} AND Flight_ID={ButtonValue}";
+            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Prepare();
+            cmd.ExecuteReader();
+
+            conn.Dispose();
+
+            --B_TableSize;
+        }
+
+        public void UnsaveFlight(string ButtonValue) {
+            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string txtcmd = $"DELETE FROM saved_flights WHERE User_ID={User_ID} AND Flight_ID={ButtonValue}";
+            MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
+            cmd.CommandType = CommandType.Text;
+
+            cmd.Prepare();
+            cmd.ExecuteReader();
+
+            conn.Dispose();
+
+            --TableSize;
+        }
+
         public async Task<IActionResult> OnPost(string submit) {
+            string parsedID = null;
+
+            for (int i = 0; i < submit.Length; i++) { // Parse Flight_ID from button value
+                if (Char.IsDigit(submit[i]))
+                    parsedID += submit[i];
+            }
+
             if (submit == "L") {
                 Console.WriteLine("DEBUG - Log Out");
                 Startup.CurrentUser.SetUser("0");
                 return Redirect($"/Flights");
             }
-            else if (submit == "S") {
+            else if (submit == "U") {
                 Console.WriteLine("DEBUG - User Settings");
                 return Redirect($"/UserSettings");
             }
+            else if (submit[0] == 'B') {
+                Console.WriteLine("DEBUG - Unbook");
+                UnbookFlight(parsedID);
+                Thread.Sleep(3000);
+                UserTableFill();
+                BookedTableFill();
+                SavedTableFill();
+                return Page();
+            }
+            else if (submit[0] == 'S') {
+                Console.WriteLine("DEBUG - Unsave");
+                Thread.Sleep(3000);
+                UnsaveFlight(parsedID);
+                UserTableFill();
+                BookedTableFill();
+                SavedTableFill();
+                return Page();
+            }
+            UserTableFill();
+            BookedTableFill();
+            SavedTableFill();
+
             return Page();
         }
     }

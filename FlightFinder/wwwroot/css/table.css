@@ -37,17 +37,22 @@ td {
 }
 
 .departure-city-table {
+    width: 80px;
     font-size: 24px;
     font-weight: bold;
 }
 
 .arrival-city-table {
+    width: 80px;
     font-size: 24px;
     font-weight: bold;
 }
 
+.flight-date-table {
+    width: 80px;
+}
+
 .arrival-departure-time-table {
-    font-size: 18px;
     width: 80px;
 }
 
