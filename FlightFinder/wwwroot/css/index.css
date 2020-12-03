@@ -1,6 +1,7 @@
 ﻿body {
-    margin: 0;
-    padding: 0;
+    background: linear-gradient(to left top, #d978d2, #cd8ee4, #c2a1f1, #bab2fa, #b7c2fe, #abccff, #a4d6ff, #a2deff, #8ee6ff, #7aedff, #68f5fe, #5ffbf3);
+    background-repeat: no-repeat;
+    background-size: 1600px;
     font-family: 'Segoe UI';
 }
 
@@ -17,14 +18,14 @@ h2 {
 }
 
 .container-center {
-    margin: 0;
-    padding: 0;
-    height: 569px;
-    width: 1560px;
-    right: 235px;
-    position: relative;
+    /*margin: 0px;
+    padding: 0px;
+    height: 100%;
+    width: 1596px;
+    background-size: cover;
     bottom: 15px;
     background-image: linear-gradient(to left top, #d978d2, #cd8ee4, #c2a1f1, #bab2fa, #b7c2fe, #abccff, #a4d6ff, #a2deff, #8ee6ff, #7aedff, #68f5fe, #5ffbf3);
+*/
 }
 
 .topnav input[type=text] {

@@ -9,6 +9,7 @@ a.navbar-brand {
     visibility: visible;
     right: 500px;
 }
+
 ul.navbar-nav {
     width: auto;
 }
@@ -46,45 +47,6 @@ img.account-icon {
 .navbar-collapse:hover .account-icon {
     opacity: 0.3;
 }
-
-/*Search Bars*/
-/*.wrapper {
-    padding: 10px;
-}
-.from-search {
-    border: 2px solid;
-    border-radius: 5px;
-    padding-right: 10px;
-    margin-right: 10px;
-}
-.to-search {
-    border: 2px solid;
-    border-radius: 5px;
-    padding-right: 10px;
-    margin-right: 10px;
-}
-.to-search:hover, .to-search:focus {
-    border: 1.5px, solid #009688;
-    background-color: azure;
- }
-
-.from-search:hover, .from-search:focus {
-    border: 1.5px, solid #009688;
-    background-color: azure;
-}
-
-img.calendar-icon {
-    height: 15px;
-    width: 15px;
-}
-
-.search-date {
-    border: 2px solid;
-    border-radius: 5px;
-    padding-right: 10px;
-    margin-right: 10px;
-}*/
-
 
 
 /* Provide sufficient contrast against white background */
@@ -144,9 +106,10 @@ body {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+    color: rgba(0, 0, 0, 0.6);
 }
