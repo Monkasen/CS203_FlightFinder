@@ -63,6 +63,8 @@ namespace FlightFinder.Pages
         static string StaticSeats;
         static string StaticCard;
 
+        public double FlightPrice;
+
         public void OnGet() {
             User_ID = Startup.CurrentUser.GetUser();
             Flight_ID = Request.Query["Flight_ID"];
@@ -71,6 +73,9 @@ namespace FlightFinder.Pages
 
             StaticSeats = Seats_Reserved;
             StaticCard = LastFour_Card;
+
+            float seatNum = Int32.Parse(Seats_Reserved);
+            FlightPrice = seatNum * 89.99;
 
             FlightTableFill();
         }

@@ -4,3 +4,25 @@
 .thead-user {
     background-image: linear-gradient(to right, #efabf6, #cfbbff, #b1c8ff, #9bd3ff, #95dafc, #86d3f5, #77cdee, #66c6e7, #35b1e7, #0099e5, #0380df, #3c64d1);
 }
+
+.update-settings {
+    width: 382px;
+    overflow: hidden;
+    margin: auto;
+    padding: 80px;
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+table.user-table {
+    position: relative;
+    margin: auto;
+}
+
+table.flight-list-table {
+    position: relative;
+    margin: auto;
+}

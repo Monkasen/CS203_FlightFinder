@@ -7,10 +7,8 @@
     margin: auto;
 
     border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 2px;
+    border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-
-    padding-right:10px;
 }
 
 table.flight-list-table {
@@ -88,6 +86,7 @@ img.time-icon {
 /*
     Textboxes
 */
+
 input:hover {
     background: lightgray;
 }
@@ -140,3 +139,77 @@ input:hover {
     border-radius: 5px;
     width: 100px;
 }
+
+/*
+input:hover {
+    background: lightgray;
+}
+
+#Arrival_Time_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+#Airline_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    width: 180px;
+}
+
+#Depart_Time_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+}
+
+#From_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+#To_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+#DepartDate_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+#Registration_Num_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    top:50px;
+}
+
+#AircraftType_TextBox {
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}*/

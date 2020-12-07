@@ -52,9 +52,8 @@
         </tbody>
     </table>
 </a>
-       
 
-<div>
+<div class="input-group">
     <form id="confirm" method="post" runat="server">
 
         <b>Select payment method:</b>
@@ -65,6 +64,10 @@
             }
         </select>
 
+        <br />
+
+        <button class="btn btn-info" name="submit" type="submit" value="N">Add New Card</button>
+
         <br /><br />
 
         <b>Select seats to reserve:</b>
@@ -74,15 +77,13 @@
             }
         </select>
 
+        <br />
+
         <button class="btn btn-success" name="submit" type="submit" value="C">Confirm Booking</button>
 
     </form>
 </div>
 
-<div>
-    <form id="card" method="post" runat="server">
-        <button class="btn btn-info" name="submit" type="submit" value="N">Add New Card</button>
-    </form>
-</div>
+
 
 

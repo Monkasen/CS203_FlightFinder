@@ -10,18 +10,6 @@
     <link rel="stylesheet" type="text/css" href="~/css/notification.css">
 </head>
 
-<form id="confirm" method="post">
-    <div>
-        <button class="btn btn-success" name="submit" type="submit" value="U">User Settings</button>
-    </div>
-</form>
-<br />
-<form id="confirm" method="post">
-    <div>
-        <button class="btn btn-danger" name="submit" type="submit" value="L">Log Out</button>
-    </div>
-</form>
-
 <body>
     <br />
     <div class="text-center">
@@ -153,6 +141,16 @@
             }
         </tbody>
     </table>
+
+    <div class="user-buttons">
+        <form id="confirm" method="post">
+            <button class="btn btn-success" name="submit" type="submit" value="U">User Settings</button>
+        </form>
+        <br />
+        <form id="confirm" method="post">
+            <button class="btn btn-danger" name="submit" type="submit" value="L">Log Out</button>
+        </form>
+    </div>
 
     <script>
         const Notification = {

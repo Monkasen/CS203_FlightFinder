@@ -6,6 +6,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="~/css/table.css">
+    <link rel="stylesheet" type="text/css" href="~/css/confirmBook.css">
 </head>
 
 <body>
@@ -53,17 +54,21 @@
         </table>
     </a>
 
-    Seats Reserved: @Html.DisplayFor(m => m.Seats_Reserved)
-    <br>
-    Card Used: @Html.DisplayFor(m => m.LastFour_Card)
+    <div class="confirmation-data">
 
-    <br />
+        <b>Seats Reserved:</b> @Html.DisplayFor(m => m.Seats_Reserved)
+        <br>
+        <b>Card Used:</b> Visa @Html.DisplayFor(m => m.LastFour_Card)
+        <br>
+        <b>Total Cost:</b> $@Html.DisplayFor(m => m.FlightPrice)
+        <br>
 
-    <a class="btn btn-danger" href="javascript:history.back()">Go Back</a>
+        <a class="btn btn-danger" href="javascript:history.back()">Go Back</a>
 
-    <form id="confirm" method="post">
-        <div>
-            <button class="btn btn-success" name="submit" type="submit" value="B">Book Flight</button>
-        </div>
-    </form>
+        <form id="confirm" method="post">
+            <div>
+                <button class="btn btn-success" name="submit" type="submit" value="B">Book Flight</button>
+            </div>
+        </form>
+    </div>
 </body>

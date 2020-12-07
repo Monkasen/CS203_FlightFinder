@@ -1,20 +1,4 @@
-﻿.btn.btn-danger {
-
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-
-.btn.btn-success {
-
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-}
-
-/*Columns of flight table*/
+﻿/*Columns of flight table*/
 th {
     width: 150px;
     text-align: center;
@@ -54,4 +38,17 @@ table.flight-list-table {
 label {
     margin-left: auto;
     margin-right: auto;
+}
+
+.user-buttons {
+    width: 300px;
+    overflow: hidden;
+    margin: auto;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
