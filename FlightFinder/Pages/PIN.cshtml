@@ -1,0 +1,59 @@
+﻿@page
+@model FlightFinder.PINModel
+@{
+    ViewData["Title"] = "PIN";
+}
+
+
+<head>
+    <title>Forgot Password Form</title>
+    <link rel="stylesheet" type="text/css" href="~/css/ForgotPassword.css">
+</head>
+<body>
+    <div class="text-center">
+        <h2>Reset Password</h2><br>
+        <div class="forgot-password">
+            <form id="password" method="post" action="">
+                <label>
+                    <b>
+                        PIN
+                    </b>
+                </label>
+                <br>
+                <input type="text" asp-for="UserPIN" placeholder="PIN">
+               
+                <br><br>
+
+                <label>
+                    <b>
+                        New Password
+                    </b>
+                </label>
+                <br>
+                <input type="password" asp-for="NewPassword" placeholder="New Password">
+
+                <br><br>
+
+                <label>
+                    <b>
+                        Confirm Password
+                    </b>
+                </label>
+                <br>
+                <input type="password" asp-for="OldPassword" placeholder="Confirm Password">
+
+                <br><br>
+                <div class="">
+                    <input type="submit" value="Submit" class="btn btn-primary form-control" />
+                </div>
+                <br>
+                <label style="color:red">@Html.DisplayFor(m => m.Error)</label>
+                <br>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+</body>
