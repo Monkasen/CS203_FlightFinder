@@ -16,5 +16,8 @@ body {
     margin: auto;
     padding: 80px;
     background: #ffffff;
-    border-radius: 15px;
+    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 }

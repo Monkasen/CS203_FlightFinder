@@ -27,7 +27,7 @@ namespace FlightFinder.Pages
 
         public bool VerifySearch()
         {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataTable dataSet = new DataTable();
@@ -41,12 +41,13 @@ namespace FlightFinder.Pages
             if (dataSet.Rows.Count < 1)
             {
                 conn.Dispose();
-
+                
                 return false;
             }
             else
             {
                 conn.Dispose();
+                
                 return true;
             }
         }

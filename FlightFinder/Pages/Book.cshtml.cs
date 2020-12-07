@@ -70,7 +70,7 @@ namespace FlightFinder.Pages {
         }
 
         public void FlightTableFill() {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             try {
@@ -125,7 +125,7 @@ namespace FlightFinder.Pages {
         }
 
         public void CardListFill() {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             try {

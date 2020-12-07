@@ -21,6 +21,7 @@ th {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    max-width:500px;
 }
 
 /*Rows of flight table*/

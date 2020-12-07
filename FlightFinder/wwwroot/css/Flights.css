@@ -9,6 +9,8 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    padding-right:10px;
 }
 
 table.flight-list-table {
@@ -58,7 +60,7 @@ thead.thead {
 .btn.btn-success  {
     position: relative;
     left: 1172px;
-    bottom: 350px;
+    bottom: 320px;
 }
 
 /*

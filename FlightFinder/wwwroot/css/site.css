@@ -7,7 +7,8 @@ a.navbar-brand {
     word-break: break-all;
     position: inherit;
     visibility: visible;
-    right: 500px;
+    margin: auto;
+    left: -230px;
 }
 
 ul.navbar-nav {
@@ -47,7 +48,6 @@ img.account-icon {
 .navbar-collapse:hover .account-icon {
     opacity: 0.3;
 }
-
 
 /* Provide sufficient contrast against white background */
 a {

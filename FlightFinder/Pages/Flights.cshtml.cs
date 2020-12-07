@@ -112,7 +112,7 @@ namespace FlightFinder.Pages
             A_Time.Clear();
             F_Date.Clear();
             Air_Name.Clear();
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -127,6 +127,7 @@ namespace FlightFinder.Pages
             if (dataSet.Rows.Count < 1)
             {
                 conn.Dispose();
+                
             }
             else
             {
@@ -175,6 +176,7 @@ namespace FlightFinder.Pages
                 }
 
                 conn.Dispose();
+                
             }
 
         }
@@ -189,7 +191,7 @@ namespace FlightFinder.Pages
             A_Time.Clear();
             F_Date.Clear();
             Air_Name.Clear();
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -254,6 +256,7 @@ namespace FlightFinder.Pages
                 }
 
                 conn.Dispose();
+                
                 return true;
             }
         }
@@ -392,7 +395,7 @@ namespace FlightFinder.Pages
         }
       
         public void TableFill() {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             try {
@@ -445,9 +448,11 @@ namespace FlightFinder.Pages
 
             }
             catch (Exception ex) {
-                Console.WriteLine("{oops - {0}", ex.Message);
+                Console.WriteLine("DEBUG - Error");
+                Redirect("/Error");
             }
-            conn.Dispose(); 
+            conn.Dispose();
+            
         }
 
         private void SaveFlightToDB(string ButtonValue) { // Saves specified flight ID to specified user ID   
@@ -455,7 +460,7 @@ namespace FlightFinder.Pages
                 return;
             }
 
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -470,10 +475,11 @@ namespace FlightFinder.Pages
             cmd.ExecuteReader();
 
             conn.Dispose();
+            
         }
 
         private bool CheckSaved(string U_ID, string F_ID) {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             conn.Open();
@@ -496,11 +502,12 @@ namespace FlightFinder.Pages
             }
 
             conn.Dispose();
+            
             return true;
         }
 
         private bool CheckBooked(string U_ID, string F_ID) {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             conn.Open();
@@ -518,10 +525,14 @@ namespace FlightFinder.Pages
 
             for (int i = 0; i < BF_User.Length; ++i) { // Check to see if the flight is already booked
                 if (BF_User[i] == U_ID && BF_Flight[i] == F_ID) {
+                    conn.Dispose();
+                    
                     return false;
                 }
             }
 
+            conn.Dispose();
+            
             return true;
         }
 

@@ -31,7 +31,7 @@ namespace FlightFinder
 
         bool VerifyUser()
         {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             DataTable dataSet = new DataTable();
@@ -50,34 +50,36 @@ namespace FlightFinder
 
             if (dataSet.Rows.Count < 1) {
                 conn.Dispose();
+                
                 return false;
             }
             else {
                 conn.Dispose();
+                
                 return true;
             }
          }
 
         void GetUserID() {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            MySqlDataAdapter adapter = new MySqlDataAdapter();
-            DataTable dataSet = new DataTable();
-
             Username = Request.Form["Username"];
             User_Email = Request.Form["User_Email"];
             Password = Request.Form["Password"];
 
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
+            MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
             string cmdText = $"SELECT User_ID FROM user WHERE Username = '{this.Username}' AND Password = '{this.Password}' AND User_Email = '{this.User_Email}'";
             MySqlCommand cmd = new MySqlCommand(cmdText, conn);
+
             cmd.CommandType = CommandType.Text;
             MySqlDataReader rdr = cmd.ExecuteReader();
+
             while (rdr.Read()) {
                 User_ID = (string.Format("{0}", rdr["user_id"].ToString()));
             }
-            Console.WriteLine(User_ID);
+
+            conn.Dispose();
         }
 
         public async Task<IActionResult> OnPost() 

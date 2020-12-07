@@ -32,20 +32,25 @@ namespace FlightFinder.Pages
 
         public bool AddUserToDB()
         {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             Username = Request.Form["Username"];
             User_Email = Request.Form["User_Email"];
             Password = Request.Form["Password"];
+            C_Password = Request.Form["C_Password"];
             Account_Creation_Date = DateTime.Today;
 
             if (Username == "" || User_Email == "" || Password == "" || C_Password == "") {
                 ErrorText = "Not all required fields are completed. Please try again.";
+                conn.Dispose();
+                
                 return false;
             }
             if (C_Password != Password) {
                 ErrorText = "Passwords do not match. Please try again.";
+                conn.Dispose();
+                
                 return false;
             }
 
@@ -62,8 +67,9 @@ namespace FlightFinder.Pages
             cmd.Parameters.AddWithValue("@Account_Creation_Date", Account_Creation_Date);
             cmd.Prepare();
             cmd.ExecuteReader();
-           
+
             conn.Dispose();
+            
             return true;
         }
 

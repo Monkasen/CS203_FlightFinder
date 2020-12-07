@@ -33,7 +33,7 @@ namespace FlightFinder.Pages
         }
 
         private void AddCardToDB() {
-            const string connectionString = "server=73.249.227.33;user id=admin;password=flightfinder20;database=FlightFinder;port=3306;persistsecurityinfo=True;";
+            const string connectionString = "server=flightfinder.cwmrpa3cnct9.us-east-1.rds.amazonaws.com;user id=admin;password=flightfinder20;database=flightfinder;port=3306;persistsecurityinfo=True;";
             MySqlConnection conn = new MySqlConnection(connectionString);
 
             Card_Name = Request.Form["Card_Name"];
@@ -62,6 +62,7 @@ namespace FlightFinder.Pages
             cmd.ExecuteReader();
 
             conn.Dispose();
+            
         }
 
         public async Task<IActionResult> OnPost() {
