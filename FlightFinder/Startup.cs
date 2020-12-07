@@ -13,6 +13,7 @@ namespace FlightFinder {
 
         public static CurrentUser CurrentUser = new CurrentUser();
         public static Search userSearch = new Search();
+        public static Email userEmail = new Email();
 
         public Startup(IConfiguration configuration)
         {
