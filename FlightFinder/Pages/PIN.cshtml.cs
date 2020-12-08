@@ -93,8 +93,7 @@ namespace FlightFinder
             NewPassword = Request.Form["NewPassword"];
 
             conn.Open();
-            string txtcmd = $"INSERT INTO user (User_Email, Password) " +
-                $"VALUES (@User_Email, @Password)";
+            string txtcmd = $"UPDATE user SET Password = @Password WHERE User_Email = '{userEmail}'";
             MySqlCommand cmd = new MySqlCommand(txtcmd, conn);
             cmd.CommandType = CommandType.Text;
 

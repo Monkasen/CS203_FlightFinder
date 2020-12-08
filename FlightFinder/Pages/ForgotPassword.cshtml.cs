@@ -35,7 +35,7 @@ namespace FlightFinder
 
             conn.Open();
 
-            string cmdText = $"SELECT * FROM user WHERE User_Email = '{User_Email}'";
+            string cmdText = $"SELECT User_Email FROM user WHERE User_Email = '{User_Email}'";
             MySqlCommand cmd = new MySqlCommand(cmdText, conn);
             cmd.CommandType = CommandType.Text;
             adapter.SelectCommand = cmd;
