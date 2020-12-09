@@ -5,6 +5,7 @@
     border: 1px solid black;
     padding: 10px;
     margin: auto;
+    margin-right: -10px;
 
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
@@ -19,23 +20,29 @@ table.flight-list-table {
 thead.thead {
     background-image: linear-gradient(to left top, #d978d2, #cd8ee4, #c2a1f1, #bab2fa, #b7c2fe, #abccff, #a4d6ff, #a2deff, #8ee6ff, #7aedff, #68f5fe, #5ffbf3);
 }
+
 .second-element {
     position: relative;
-    /*will need to add more spacing between the textboxes*/
+    left: 0px;
+    bottom: 70px;
+}
+
+.second-element {
+    position: relative;
     left: 270px;
-    bottom: 87px;
+    bottom: 80px;
 }
 
 .third-element {
     position: relative;
     left: 570px;
-    bottom: 175px;
+    bottom: 160px;
 }
 
 .fourth-element {
     position: relative;
     left: 860px;
-    bottom: 265px;
+    bottom: 240px;
 }
 
 .to .text-to {
@@ -58,7 +65,7 @@ thead.thead {
 .btn.btn-success  {
     position: relative;
     left: 1172px;
-    bottom: 320px;
+    bottom: 300px;
 }
 
 /*
@@ -92,65 +99,15 @@ input:hover {
 }
 
 #Arrival_Time_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    padding-right: 10px;
-    margin-right: 10px;
-}
-#Airline_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    width: 170px;
-}
-
-#Depart_Time_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    padding-right: 10px;
-    margin-right: 10px;
-}
-
-#From_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    
-}
-
-#To_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    
-}
-
-#DepartDate_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-#Registration_Num_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    width: 100px;
-}
-
-#AircraftType_TextBox {
-    border: 3px solid;
-    border-radius: 5px;
-    width: 100px;
-}
-
-/*
-input:hover {
-    background: lightgray;
-}
-
-#Arrival_Time_TextBox {
     background: #ffffff;
     border: 1px solid black;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    padding-right: 10px;
+    margin-left: 4px;
+    width: 120px;
 }
 
 #Airline_TextBox {
@@ -160,7 +117,7 @@ input:hover {
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
-    width: 180px;
+    width: 167px;
 }
 
 #Depart_Time_TextBox {
@@ -170,6 +127,9 @@ input:hover {
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
+    padding-right: 10px;
+    margin-left: 3px;
+    width: 120px;
 }
 
 #From_TextBox {
@@ -178,6 +138,8 @@ input:hover {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    width: 167px;
 }
 
 #To_TextBox {
@@ -186,6 +148,8 @@ input:hover {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    width: 167px;
 }
 
 #DepartDate_TextBox {
@@ -194,6 +158,9 @@ input:hover {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+
+    margin-left: 3px;
+    width: 167px;
 }
 
 #Registration_Num_TextBox {
@@ -203,7 +170,7 @@ input:hover {
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
-    top:50px;
+    width: 100px;
 }
 
 #AircraftType_TextBox {
@@ -212,4 +179,7 @@ input:hover {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-}*/
+
+    width: 100px;
+    margin-left: 2px;
+}

@@ -145,7 +145,7 @@ namespace FlightFinder.Pages
                 mail.To.Add($"{GetUserEmail()}");
                 mail.Subject = "Test Mail";
                 mail.Body = $"This is a confirmation email for your recent booking on FlightFinder.com. You have reserved a flight from {Departure_City[0]} to {Arrival_City[0]}. You have reserved {StaticSeats} seat(s) for this flight." +
-                    $" You made this reservation using a card ending in {StaticCard}.";
+                    $" You made this reservation using a card ending in {StaticCard}. The total cost was: ${FlightPrice}";
 
                 SmtpServer.Port = 587;
                 SmtpServer.Credentials = new System.Net.NetworkCredential("flightfinder20@gmail.com", "Flightfinder20!");
